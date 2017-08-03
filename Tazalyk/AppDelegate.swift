@@ -7,15 +7,47 @@
 //
 
 import UIKit
+import Firebase
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDelegate {
 
     var window: UIWindow?
-
-
+    var firstNavigationController: UINavigationController?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        self.firstNavigationController = UINavigationController()
+        let firstViewController = FirstViewController()
+        
+        if let firstNavigationController = self.firstNavigationController {
+            
+            firstNavigationController.delegate = self
+            firstNavigationController.setNavigationBarHidden(true, animated: false)
+            firstNavigationController.pushViewController(firstViewController, animated: false)
+            
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            
+            if let window = self.window {
+                window.rootViewController = firstNavigationController
+                window.makeKeyAndVisible()
+            }
+            
+        }
+        
+        //UserNotification
+        if #available(iOS 10, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { (granted, error) in
+                application.registerForRemoteNotifications()
+            })
+        } else {
+                let notificationSettings = UIUserNotificationSettings(types: [.badge, .alert, .sound], categories: nil)
+                UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+                UIApplication.shared.registerForRemoteNotifications()
+        }
+    
+        FirebaseApp.configure()
         return true
     }
 
