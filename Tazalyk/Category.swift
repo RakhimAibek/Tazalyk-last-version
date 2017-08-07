@@ -11,9 +11,9 @@ import FirebaseDatabase
 
 class Category: NSObject {
     
-    let name: String
+    let name: String?
     
-    init(name: String) {
+    init(name: String?) {
         self.name = name
     }
     

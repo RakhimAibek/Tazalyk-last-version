@@ -29,14 +29,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    var pinArray: [[String: AnyObject]] = [[:]]
-    
-//    var pins = Pin.loadPlaces()
+    var pinArray = [Pin]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        genData()
         setupViews()
         constraintsSetup()
         determineMyCurrentLocation()
@@ -48,19 +45,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if let res = result {
                 self.categoryArray = res
             } else {
-                print(error ?? "error")
+                print(error ?? "error category fetching")
             }
         }
         
-        //TODO: Pin fetching
+        //Pin fetching
+        Pin.fetch { (result, error) in
+            if let res = result {
+                self.pinArray = res
+            } else {
+                print(error ?? "error pin fetching")
+            }
+        }
+        // Add custom pins in mapView
+        mapView.addAnnotations(pinArray)
     }
-    
-    // Add custom pins in mapView
-//    func genData() {
-//        for pin in pins {
-//            mapView.addAnnotation(pin)
-//        }
-//    }
     
     //viewFor annotation calls every pin annotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -185,7 +184,7 @@ extension MapViewController: UICollectionViewDataSource, UICollectionViewDelegat
         cell.backgroundColor = .white
         
         categoryArray.forEach() {_ in
-            cell.imageView.image = UIImage(named: categoryArray[indexPath.item].name)
+            cell.imageView.image = UIImage(named: categoryArray[indexPath.item].name!)
             cell.categoryTitleLabel.text = categoryArray[indexPath.item].name
         }
         return cell
