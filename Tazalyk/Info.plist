@@ -4,6 +4,11 @@
 <dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Нам нужна ваша геопозиция для отображения Вас на карте</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Нам нужна ваша геопозиция для отображения Вас на карте</string>
 	<key>CFBundleDevelopmentRegion</key>

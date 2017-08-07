@@ -66,14 +66,14 @@ class FirstViewController: UIViewController {
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.titleLabel?.font = UIFont(name: "ProximaNova-Bold", size: 16.0)
         loginButton.setTitleColor(UIColor(red: 219.0/255, green: 219.0/255, blue: 219.0/255, alpha: 0.7), for: .highlighted)
-        loginButton.addTarget(self, action: #selector(loginButtonPressed(sender:)), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
         
         //MissButton
         missButton.setTitleColor(UIColor(red: 219.0/255, green: 219.0/255, blue: 219.0/255, alpha: 0.7), for: .highlighted)
         missButton.setTitleColor(UIColor.white, for: .normal)
         missButton.titleLabel?.font = UIFont(name: "ProximaNova-Semibold", size: 16.0)
         missButton.setTitle("Позже", for: .normal)
-        missButton.addTarget(self, action: #selector(missButtonPressed(sender:)), for: .touchUpInside)
+        missButton.addTarget(self, action: #selector(missButtonPressed), for: .touchUpInside)
         
         //adding UIElements to superView
         [bgImage, bgShadow, logoImage, labelText, loginButton, missButton].forEach {
@@ -119,16 +119,6 @@ class FirstViewController: UIViewController {
             Bottom(15.0).to(view)
         ]
     
-    }
-    
-    func loginButtonPressed(sender: UIButton) {
-        let loginVC = LoginViewController()
-        present(loginVC, animated: true, completion: nil)
-    }
-
-    func missButtonPressed(sender: UIButton) {
-        let tabBarVC = TabBarViewController()
-        present(tabBarVC, animated: true, completion: nil)
     }
 }
 

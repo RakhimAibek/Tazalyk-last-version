@@ -250,7 +250,6 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     }
     
     //ResendCodeBTN pressed
-    
     func resendCode(sender: UIButton) {
         //TODO: Alert
     }

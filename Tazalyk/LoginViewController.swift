@@ -5,8 +5,6 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
 import EasyPeasy
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
@@ -68,14 +66,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         sendCodeButton.titleLabel?.font = UIFont(name: "ProximaNova-Bold", size: 18.0)
         sendCodeButton.setTitleColor(UIColor.white, for: .normal)
         sendCodeButton.setTitleColor(UIColor(red: 219.0/255, green: 219.0/255, blue: 219.0/255, alpha: 0.7), for: .highlighted)
-        sendCodeButton.addTarget(self, action: #selector(sendCodeBTNpressed(sender:)), for: .touchUpInside)
+        sendCodeButton.addTarget(self, action: #selector(sendCodeBTNpressed), for: .touchUpInside)
         
         //missButton setuping
         missButton.setTitle("Позже", for: .normal)
         missButton.setTitleColor(UIColor(red: 146.0/255.0, green: 214.0/255.0, blue: 255.0/255.0, alpha: 1), for: .normal)
         missButton.setTitleColor(UIColor.white, for: .highlighted)
         missButton.titleLabel?.font = UIFont(name: "ProximaNova-Semibold", size: 16.0)
-        missButton.addTarget(self, action: #selector(missButtonPressed(sender:)), for: .touchUpInside)
+        missButton.addTarget(self, action: #selector(missButtonPressed), for: .touchUpInside)
         
         //holdView setuping
         holdView.addSubview(numberFormatView)
@@ -196,51 +194,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         numberTextField.resignFirstResponder()
         sendCodeButton.resignFirstResponder()
         return true
-    }
-    
-    //MARK: -MissButtonPressed
-    func missButtonPressed(sender: UIButton) {
-        let tabBarVC = TabBarViewController()
-        present(tabBarVC, animated: true, completion: nil)
-    }
-    
-    //MARK: -SendCodeButtonPressed
-    func sendCodeBTNpressed(sender: UIButton) {
-        
-        if numberTextField.text != "" && (numberTextField.text?.characters.count)! >= 10 {
-            
-            numberTextField.layer.borderColor = (UIColor(red: 74.0/255.0, green: 144.0/255.0, blue: 226.0/255.0, alpha: 1)).cgColor
-            numberFormatView.layer.borderColor = (UIColor(red: 74.0/255.0, green: 144.0/255.0, blue: 226.0/255.0, alpha: 1)).cgColor
-            numberTextField.layer.borderWidth = 1
-            
-            //Alert to verificationNumber
-            let userNumber = formatLabelText.text! + numberTextField.text!
-            let alert = UIAlertController(title: "Убедитесь в правильности", message: "Я уверен, это мой номер \(userNumber)?", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Да!", style: .default, handler: { [weak self](UIAlertAction) in
-                
-                //PhoneVerification
-                PhoneAuthProvider.provider().verifyPhoneNumber("\(userNumber)", completion: { (verificationCode, error) in
-                    if error != nil {
-                        print("Verification error\(String(describing: error?.localizedDescription))")
-                    } else {
-                        //MARK: UserDefaults
-                        let defaults = UserDefaults.standard
-                        defaults.set(verificationCode!, forKey: "verificationId")
-                    }
-                    let authVC = AuthorizationViewController()
-                    self?.present(authVC, animated: true, completion: nil)
-                })
-            })
-            
-            let cancel = UIAlertAction(title: "Нет", style: .default, handler: nil)
-            
-            alert.addAction(action)
-            alert.addAction(cancel)
-            self.present(alert, animated: true, completion: nil)
-            
-        } else {
-            numberTextField.layer.borderColor = UIColor.red.cgColor
-            numberFormatView.layer.borderColor = UIColor.red.cgColor
-        }
     }
 }

@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		DC03E2BEE1E7AD06AA9EAE83 /* Pods_Tazalyk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E811BEC11EA36EDEA73DAA7A /* Pods_Tazalyk.framework */; };
 		E3B369191F2BB83700C6C7C5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B369181F2BB83700C6C7C5 /* MapViewController.swift */; };
+		E3B77EF91F344B24008B1937 /* MapVC+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B77EF81F344B24008B1937 /* MapVC+constraints.swift */; };
 		E3B9C5B91F21D66C00A69ABC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9C5B81F21D66C00A69ABC /* AppDelegate.swift */; };
 		E3B9C5BB1F21D66C00A69ABC /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9C5BA1F21D66C00A69ABC /* FirstViewController.swift */; };
-		E3B9C5C01F21D66C00A69ABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3B9C5BF1F21D66C00A69ABC /* Assets.xcassets */; };
 		E3B9C5C31F21D66C00A69ABC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B9C5C11F21D66C00A69ABC /* LaunchScreen.storyboard */; };
+		E3CD77261F38314700A865F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3CD77251F38314700A865F3 /* Assets.xcassets */; };
 		E3D6736F1F2945BF00D9C0B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6736E1F2945BF00D9C0B9 /* LoginViewController.swift */; };
 		E3D673721F29CA7F00D9C0B9 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D673711F29CA7F00D9C0B9 /* Storyboard.storyboard */; };
 		E3ED7C8A1F2A6BB300DD5A56 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED7C891F2A6BB300DD5A56 /* AuthorizationViewController.swift */; };
@@ -25,10 +26,12 @@
 		E3FD80561F2F994400AF31FB /* Proxima Nova Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E3FD804D1F2F981000AF31FB /* Proxima Nova Regular.otf */; };
 		E3FD80571F2F994400AF31FB /* Proxima Nova Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E3FD804F1F2F981000AF31FB /* Proxima Nova Semibold.otf */; };
 		E3FD805D1F30518200AF31FB /* CategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD805C1F30518200AF31FB /* CategoryCollectionCell.swift */; };
-		E3FD805F1F30534C00AF31FB /* TypeWaste.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD805E1F30534C00AF31FB /* TypeWaste.swift */; };
+		E3FD805F1F30534C00AF31FB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD805E1F30534C00AF31FB /* Category.swift */; };
 		E3FD80611F30539E00AF31FB /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD80601F30539E00AF31FB /* Pin.swift */; };
 		E3FD80631F32FCE000AF31FB /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD80621F32FCE000AF31FB /* RankingViewController.swift */; };
 		E3FD80651F32FCEB00AF31FB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD80641F32FCEB00AF31FB /* ProfileViewController.swift */; };
+		E3FD80671F3316ED00AF31FB /* FirstVC+handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD80661F3316ED00AF31FB /* FirstVC+handler.swift */; };
+		E3FD80691F33191600AF31FB /* LoginVC+handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FD80681F33191600AF31FB /* LoginVC+handler.swift */; };
 		E3FD88541F2C74FF000B0F51 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FD88531F2C74FF000B0F51 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,12 +39,13 @@
 		ADDEA08549FB69ABC972C64F /* Pods-Tazalyk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tazalyk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tazalyk/Pods-Tazalyk.debug.xcconfig"; sourceTree = "<group>"; };
 		E32F476A1F266FFC00E6E605 /* Tazalyk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tazalyk.entitlements; sourceTree = "<group>"; };
 		E3B369181F2BB83700C6C7C5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E3B77EF81F344B24008B1937 /* MapVC+constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MapVC+constraints.swift"; sourceTree = "<group>"; };
 		E3B9C5B51F21D66C00A69ABC /* Tazalyk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tazalyk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3B9C5B81F21D66C00A69ABC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3B9C5BA1F21D66C00A69ABC /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		E3B9C5BF1F21D66C00A69ABC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3B9C5C21F21D66C00A69ABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3B9C5C41F21D66C00A69ABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3CD77251F38314700A865F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3D6736E1F2945BF00D9C0B9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E3D673711F29CA7F00D9C0B9 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		E3ED7C891F2A6BB300DD5A56 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -54,10 +58,12 @@
 		E3FD804D1F2F981000AF31FB /* Proxima Nova Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Regular.otf"; sourceTree = "<group>"; };
 		E3FD804F1F2F981000AF31FB /* Proxima Nova Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Semibold.otf"; sourceTree = "<group>"; };
 		E3FD805C1F30518200AF31FB /* CategoryCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionCell.swift; sourceTree = "<group>"; };
-		E3FD805E1F30534C00AF31FB /* TypeWaste.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeWaste.swift; sourceTree = "<group>"; };
+		E3FD805E1F30534C00AF31FB /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		E3FD80601F30539E00AF31FB /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		E3FD80621F32FCE000AF31FB /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		E3FD80641F32FCEB00AF31FB /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E3FD80661F3316ED00AF31FB /* FirstVC+handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FirstVC+handler.swift"; sourceTree = "<group>"; };
+		E3FD80681F33191600AF31FB /* LoginVC+handler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginVC+handler.swift"; sourceTree = "<group>"; };
 		E3FD88531F2C74FF000B0F51 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E811BEC11EA36EDEA73DAA7A /* Pods_Tazalyk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tazalyk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6ACB551693F3E9AD80C788 /* Pods-Tazalyk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tazalyk.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tazalyk/Pods-Tazalyk.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,10 +133,13 @@
 			isa = PBXGroup;
 			children = (
 				E3B9C5BA1F21D66C00A69ABC /* FirstViewController.swift */,
+				E3FD80661F3316ED00AF31FB /* FirstVC+handler.swift */,
 				E3D6736E1F2945BF00D9C0B9 /* LoginViewController.swift */,
+				E3FD80681F33191600AF31FB /* LoginVC+handler.swift */,
 				E3ED7C891F2A6BB300DD5A56 /* AuthorizationViewController.swift */,
 				E3ED7C8F1F2B661E00DD5A56 /* TabBarViewController.swift */,
 				E3B369181F2BB83700C6C7C5 /* MapViewController.swift */,
+				E3B77EF81F344B24008B1937 /* MapVC+constraints.swift */,
 				E3FD80621F32FCE000AF31FB /* RankingViewController.swift */,
 				E3FD80641F32FCEB00AF31FB /* ProfileViewController.swift */,
 			);
@@ -149,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				E3FD80601F30539E00AF31FB /* Pin.swift */,
-				E3FD805E1F30534C00AF31FB /* TypeWaste.swift */,
+				E3FD805E1F30534C00AF31FB /* Category.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -159,7 +168,7 @@
 			children = (
 				E3FD80431F2F97B800AF31FB /* Fonts */,
 				E3B9C5B81F21D66C00A69ABC /* AppDelegate.swift */,
-				E3B9C5BF1F21D66C00A69ABC /* Assets.xcassets */,
+				E3CD77251F38314700A865F3 /* Assets.xcassets */,
 				E3B9C5C11F21D66C00A69ABC /* LaunchScreen.storyboard */,
 				E32F476A1F266FFC00E6E605 /* Tazalyk.entitlements */,
 				E3ED7C8D1F2B58E300DD5A56 /* GoogleService-Info.plist */,
@@ -263,12 +272,12 @@
 				E3FD80531F2F994400AF31FB /* Proxima Nova Bold.otf in Resources */,
 				E3FD80541F2F994400AF31FB /* Proxima Nova Light.otf in Resources */,
 				E3FD80551F2F994400AF31FB /* Proxima Nova Regular Italic.otf in Resources */,
+				E3CD77261F38314700A865F3 /* Assets.xcassets in Resources */,
 				E3FD80561F2F994400AF31FB /* Proxima Nova Regular.otf in Resources */,
 				E3FD80571F2F994400AF31FB /* Proxima Nova Semibold.otf in Resources */,
 				E3B9C5C31F21D66C00A69ABC /* LaunchScreen.storyboard in Resources */,
 				E3ED7C8E1F2B58E300DD5A56 /* GoogleService-Info.plist in Resources */,
 				E3D673721F29CA7F00D9C0B9 /* Storyboard.storyboard in Resources */,
-				E3B9C5C01F21D66C00A69ABC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,9 +336,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3FD805F1F30534C00AF31FB /* TypeWaste.swift in Sources */,
+				E3B77EF91F344B24008B1937 /* MapVC+constraints.swift in Sources */,
+				E3FD805F1F30534C00AF31FB /* Category.swift in Sources */,
 				E3ED7C8A1F2A6BB300DD5A56 /* AuthorizationViewController.swift in Sources */,
+				E3FD80671F3316ED00AF31FB /* FirstVC+handler.swift in Sources */,
 				E3B369191F2BB83700C6C7C5 /* MapViewController.swift in Sources */,
+				E3FD80691F33191600AF31FB /* LoginVC+handler.swift in Sources */,
 				E3FD805D1F30518200AF31FB /* CategoryCollectionCell.swift in Sources */,
 				E3D6736F1F2945BF00D9C0B9 /* LoginViewController.swift in Sources */,
 				E3FD80631F32FCE000AF31FB /* RankingViewController.swift in Sources */,
