@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import SVProgressHUD
 
 extension LoginViewController {
     
@@ -26,24 +27,36 @@ extension LoginViewController {
             
             //Alert to verificationNumber
             let userNumber = formatLabelText.text! + numberTextField.text!
-            let alert = UIAlertController(title: "Убедитесь в правильности", message: "Я уверен, это мой номер \(userNumber)?", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Да!", style: .default, handler: { [weak self](UIAlertAction) in
+            let alert = UIAlertController(title: "Проверьте свои номер в правильности", message: "Это Ваш номер телефона \(userNumber)?", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Да", style: .default, handler: { [weak self] (UIAlertAction) in
+                
+                SVProgressHUD.show(withStatus: "Авторизация...")
                 
                 //PhoneVerification
                 PhoneAuthProvider.provider().verifyPhoneNumber("\(userNumber)", completion: { (verificationCode, error) in
+                    
                     if error != nil {
-                        print("Verification error\(String(describing: error?.localizedDescription))")
+                        
+                        SVProgressHUD.showError(withStatus: "Ошибка.. Попробуйте еще")
+                        SVProgressHUD.dismiss(withDelay: 1.5)
+                        print("Verification error \(String(describing: error?.localizedDescription))")
+                        
                     } else {
+                        
                         //MARK: UserDefaults
                         let defaults = UserDefaults.standard
                         defaults.set(verificationCode!, forKey: "verificationId")
+                        SVProgressHUD.dismiss(completion: {
+                            SVProgressHUD.showSuccess(withStatus: "Код успешно отправлен")
+                            SVProgressHUD.dismiss(withDelay: 1.5)
+                            let authVC = AuthorizationViewController()
+                            self?.present(authVC, animated: true, completion: nil)
+                        })
                     }
-                    let authVC = AuthorizationViewController()
-                    self?.present(authVC, animated: true, completion: nil)
                 })
             })
             
-            let cancel = UIAlertAction(title: "Нет", style: .default, handler: nil)
+            let cancel = UIAlertAction(title: "Нет", style: .destructive, handler: nil)
             
             alert.addAction(action)
             alert.addAction(cancel)

@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		DC03E2BEE1E7AD06AA9EAE83 /* Pods_Tazalyk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E811BEC11EA36EDEA73DAA7A /* Pods_Tazalyk.framework */; };
+		E3057A601F61AACC006E0955 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3057A5E1F61AACC006E0955 /* Fabric.framework */; };
+		E3057A611F61AACC006E0955 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3057A5F1F61AACC006E0955 /* Crashlytics.framework */; };
+		E3370F5D1F3D829D00DC279E /* ProfileVC+configureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3370F5C1F3D829D00DC279E /* ProfileVC+configureView.swift */; };
+		E3370F5F1F3F74F200DC279E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3370F5E1F3F74F200DC279E /* User.swift */; };
 		E3B369191F2BB83700C6C7C5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B369181F2BB83700C6C7C5 /* MapViewController.swift */; };
-		E3B77EF91F344B24008B1937 /* MapVC+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B77EF81F344B24008B1937 /* MapVC+constraints.swift */; };
+		E3B77EF91F344B24008B1937 /* MapVC+configureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B77EF81F344B24008B1937 /* MapVC+configureView.swift */; };
 		E3B9C5B91F21D66C00A69ABC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9C5B81F21D66C00A69ABC /* AppDelegate.swift */; };
 		E3B9C5BB1F21D66C00A69ABC /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9C5BA1F21D66C00A69ABC /* FirstViewController.swift */; };
 		E3B9C5C31F21D66C00A69ABC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B9C5C11F21D66C00A69ABC /* LaunchScreen.storyboard */; };
@@ -19,6 +23,12 @@
 		E3ED7C8A1F2A6BB300DD5A56 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED7C891F2A6BB300DD5A56 /* AuthorizationViewController.swift */; };
 		E3ED7C8E1F2B58E300DD5A56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3ED7C8D1F2B58E300DD5A56 /* GoogleService-Info.plist */; };
 		E3ED7C901F2B661E00DD5A56 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED7C8F1F2B661E00DD5A56 /* TabBarViewController.swift */; };
+		E3F713C21F4327FA00377618 /* NotRegisteredProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F713C11F4327FA00377618 /* NotRegisteredProfileVC.swift */; };
+		E3F713C41F462FAF00377618 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F713C31F462FAF00377618 /* SettingsViewController.swift */; };
+		E3F713C61F46DE2800377618 /* Passed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F713C51F46DE2800377618 /* Passed.swift */; };
+		E3F713E81F48B0E200377618 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F713E71F48B0E200377618 /* AdminViewController.swift */; };
+		E3F713EA1F4DB41D00377618 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F713E91F4DB41D00377618 /* RankingTableViewCell.swift */; };
+		E3F713EC1F4EE49C00377618 /* DetailedPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F713EB1F4EE49C00377618 /* DetailedPinViewController.swift */; };
 		E3FD80521F2F994400AF31FB /* Proxima Nova Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = E3FD80451F2F981000AF31FB /* Proxima Nova Black.otf */; };
 		E3FD80531F2F994400AF31FB /* Proxima Nova Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E3FD80471F2F981000AF31FB /* Proxima Nova Bold.otf */; };
 		E3FD80541F2F994400AF31FB /* Proxima Nova Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E3FD804B1F2F981000AF31FB /* Proxima Nova Light.otf */; };
@@ -37,9 +47,13 @@
 
 /* Begin PBXFileReference section */
 		ADDEA08549FB69ABC972C64F /* Pods-Tazalyk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tazalyk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tazalyk/Pods-Tazalyk.debug.xcconfig"; sourceTree = "<group>"; };
+		E3057A5E1F61AACC006E0955 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Tazalyk/Fabric.framework; sourceTree = "<group>"; };
+		E3057A5F1F61AACC006E0955 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Tazalyk/Crashlytics.framework; sourceTree = "<group>"; };
 		E32F476A1F266FFC00E6E605 /* Tazalyk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tazalyk.entitlements; sourceTree = "<group>"; };
+		E3370F5C1F3D829D00DC279E /* ProfileVC+configureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileVC+configureView.swift"; sourceTree = "<group>"; };
+		E3370F5E1F3F74F200DC279E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E3B369181F2BB83700C6C7C5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		E3B77EF81F344B24008B1937 /* MapVC+constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MapVC+constraints.swift"; sourceTree = "<group>"; };
+		E3B77EF81F344B24008B1937 /* MapVC+configureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MapVC+configureView.swift"; sourceTree = "<group>"; };
 		E3B9C5B51F21D66C00A69ABC /* Tazalyk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tazalyk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3B9C5B81F21D66C00A69ABC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3B9C5BA1F21D66C00A69ABC /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +65,12 @@
 		E3ED7C891F2A6BB300DD5A56 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		E3ED7C8D1F2B58E300DD5A56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3ED7C8F1F2B661E00DD5A56 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		E3F713C11F4327FA00377618 /* NotRegisteredProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotRegisteredProfileVC.swift; sourceTree = "<group>"; };
+		E3F713C31F462FAF00377618 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E3F713C51F46DE2800377618 /* Passed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passed.swift; sourceTree = "<group>"; };
+		E3F713E71F48B0E200377618 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
+		E3F713E91F4DB41D00377618 /* RankingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
+		E3F713EB1F4EE49C00377618 /* DetailedPinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedPinViewController.swift; sourceTree = "<group>"; };
 		E3FD80451F2F981000AF31FB /* Proxima Nova Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Black.otf"; sourceTree = "<group>"; };
 		E3FD80471F2F981000AF31FB /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Bold.otf"; sourceTree = "<group>"; };
 		E3FD804B1F2F981000AF31FB /* Proxima Nova Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Light.otf"; sourceTree = "<group>"; };
@@ -76,6 +96,8 @@
 			files = (
 				E3FD88541F2C74FF000B0F51 /* MapKit.framework in Frameworks */,
 				DC03E2BEE1E7AD06AA9EAE83 /* Pods_Tazalyk.framework in Frameworks */,
+				E3057A611F61AACC006E0955 /* Crashlytics.framework in Frameworks */,
+				E3057A601F61AACC006E0955 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +116,8 @@
 		81FFD3011E30DDFFA92B4F8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3057A5E1F61AACC006E0955 /* Fabric.framework */,
+				E3057A5F1F61AACC006E0955 /* Crashlytics.framework */,
 				E3FD88531F2C74FF000B0F51 /* MapKit.framework */,
 				E811BEC11EA36EDEA73DAA7A /* Pods_Tazalyk.framework */,
 			);
@@ -132,6 +156,7 @@
 		E3B9C5CA1F21D79400A69ABC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E3F713E71F48B0E200377618 /* AdminViewController.swift */,
 				E3B9C5BA1F21D66C00A69ABC /* FirstViewController.swift */,
 				E3FD80661F3316ED00AF31FB /* FirstVC+handler.swift */,
 				E3D6736E1F2945BF00D9C0B9 /* LoginViewController.swift */,
@@ -139,9 +164,13 @@
 				E3ED7C891F2A6BB300DD5A56 /* AuthorizationViewController.swift */,
 				E3ED7C8F1F2B661E00DD5A56 /* TabBarViewController.swift */,
 				E3B369181F2BB83700C6C7C5 /* MapViewController.swift */,
-				E3B77EF81F344B24008B1937 /* MapVC+constraints.swift */,
+				E3B77EF81F344B24008B1937 /* MapVC+configureView.swift */,
+				E3F713EB1F4EE49C00377618 /* DetailedPinViewController.swift */,
 				E3FD80621F32FCE000AF31FB /* RankingViewController.swift */,
 				E3FD80641F32FCEB00AF31FB /* ProfileViewController.swift */,
+				E3370F5C1F3D829D00DC279E /* ProfileVC+configureView.swift */,
+				E3F713C11F4327FA00377618 /* NotRegisteredProfileVC.swift */,
+				E3F713C31F462FAF00377618 /* SettingsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -150,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				E3FD805C1F30518200AF31FB /* CategoryCollectionCell.swift */,
+				E3F713E91F4DB41D00377618 /* RankingTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -159,6 +189,8 @@
 			children = (
 				E3FD80601F30539E00AF31FB /* Pin.swift */,
 				E3FD805E1F30534C00AF31FB /* Category.swift */,
+				E3370F5E1F3F74F200DC279E /* User.swift */,
+				E3F713C51F46DE2800377618 /* Passed.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -204,6 +236,7 @@
 				E3B9C5B31F21D66C00A69ABC /* Resources */,
 				FBE65B6C7592C70ABE69C5F3 /* [CP] Embed Pods Frameworks */,
 				5F2C8B29A3316D3FF654384B /* [CP] Copy Pods Resources */,
+				E3057A5D1F61A9AB006E0955 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -314,6 +347,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		E3057A5D1F61A9AB006E0955 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 909eb981afbd258183fa6213721ca739efea4672 77e8b4aa10e98669156abec687942c64aec4b7cd8df3b514c1d0d5adc35f4174";
+		};
 		FBE65B6C7592C70ABE69C5F3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -336,20 +382,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3B77EF91F344B24008B1937 /* MapVC+constraints.swift in Sources */,
+				E3B77EF91F344B24008B1937 /* MapVC+configureView.swift in Sources */,
 				E3FD805F1F30534C00AF31FB /* Category.swift in Sources */,
 				E3ED7C8A1F2A6BB300DD5A56 /* AuthorizationViewController.swift in Sources */,
+				E3F713C61F46DE2800377618 /* Passed.swift in Sources */,
+				E3F713EC1F4EE49C00377618 /* DetailedPinViewController.swift in Sources */,
 				E3FD80671F3316ED00AF31FB /* FirstVC+handler.swift in Sources */,
+				E3370F5F1F3F74F200DC279E /* User.swift in Sources */,
 				E3B369191F2BB83700C6C7C5 /* MapViewController.swift in Sources */,
 				E3FD80691F33191600AF31FB /* LoginVC+handler.swift in Sources */,
+				E3F713E81F48B0E200377618 /* AdminViewController.swift in Sources */,
 				E3FD805D1F30518200AF31FB /* CategoryCollectionCell.swift in Sources */,
 				E3D6736F1F2945BF00D9C0B9 /* LoginViewController.swift in Sources */,
+				E3F713EA1F4DB41D00377618 /* RankingTableViewCell.swift in Sources */,
 				E3FD80631F32FCE000AF31FB /* RankingViewController.swift in Sources */,
 				E3FD80651F32FCEB00AF31FB /* ProfileViewController.swift in Sources */,
 				E3B9C5BB1F21D66C00A69ABC /* FirstViewController.swift in Sources */,
+				E3370F5D1F3D829D00DC279E /* ProfileVC+configureView.swift in Sources */,
 				E3FD80611F30539E00AF31FB /* Pin.swift in Sources */,
 				E3ED7C901F2B661E00DD5A56 /* TabBarViewController.swift in Sources */,
 				E3B9C5B91F21D66C00A69ABC /* AppDelegate.swift in Sources */,
+				E3F713C21F4327FA00377618 /* NotRegisteredProfileVC.swift in Sources */,
+				E3F713C41F462FAF00377618 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,12 +520,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tazalyk/Tazalyk.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZX75ER273A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Tazalyk",
+				);
 				INFOPLIST_FILE = Tazalyk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kz.ibek.Tazalyk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -483,12 +543,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tazalyk/Tazalyk.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZX75ER273A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Tazalyk",
+				);
 				INFOPLIST_FILE = Tazalyk/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = kz.ibek.Tazalyk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

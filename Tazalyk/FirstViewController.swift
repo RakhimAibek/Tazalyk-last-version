@@ -22,17 +22,29 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
         setupViews()
         setupConstraints()
         createGradientLayer()
+        view.backgroundColor = UIColor.white
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
         if UserDefaults.standard.object(forKey: "userUID") != nil {
             let tabBarVC = TabBarViewController()
             present(tabBarVC, animated: false, completion: nil)
         }
+        
+        if UserDefaults.standard.object(forKey: "adminRole") != nil {
+            let adminVC = AdminViewController()
+            present(adminVC, animated: true, completion: nil)
+        }
     }
-
+    
     func createGradientLayer() {
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds

@@ -14,14 +14,37 @@ class Pin: NSObject, MKAnnotation {
     var category: Category?
     var title: String?
     var coordinate: CLLocationCoordinate2D
+    var address: String?
+    var timeTable: String?
+    var contactInfo: String?
+    var imageLink: String?
+    var sales: String?
+    
+    init(title: String, coordinate: CLLocationCoordinate2D, category: Category, address: String, timeTable: String, contactInfo: String, imageLink: String, sales: String) {
+        self.title = title
+        self.category = category
+        self.coordinate = coordinate
+        self.address = address
+        self.timeTable = timeTable
+        self.contactInfo = contactInfo
+        self.imageLink = imageLink
+        self.sales = sales
+    }
     
     init(dictionary: [String: Any]) {
-        self.title = dictionary["title"] as? String
-        
+
         let coordinateData = dictionary["coordinate"] as? [String: Double]
         self.coordinate = CLLocationCoordinate2D(latitude: (coordinateData?["latitude"] ?? 0),
                                                  longitude: (coordinateData?["longtitude"] ?? 0))
+        
+        self.title = dictionary["title"] as? String
         category = Category(name:( dictionary["category"] as? String))
+        self.address = dictionary["address"] as? String
+        self.contactInfo = dictionary["contact"] as? String
+        self.timeTable = dictionary["timeTable"] as? String
+        self.imageLink = dictionary["imageLink"] as? String
+        self.sales = dictionary["sales"] as? String
+        
         super.init()
     }
     
@@ -41,15 +64,5 @@ class Pin: NSObject, MKAnnotation {
             completion(nil, "Fetching error occured")
         })
     }
-
-    
-    
-    
-//    static func loadPlaces() -> [Pin] {
-//        return [
-//            Pin(title: "Прием макулатуры", coordinate: CLLocationCoordinate2DMake(51.161098, 71.484139)),
-//            Pin(title: "Прием пластика", coordinate: CLLocationCoordinate2DMake(51.126806, 71.472631))
-//        ]
-//    }
 }
 

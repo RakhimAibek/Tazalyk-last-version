@@ -7,54 +7,224 @@
 //
 
 import UIKit
+import Social
 import EasyPeasy
+import SVProgressHUD
 import FirebaseAuth
+import FirebaseDatabase
+import CircleProgressView
 
 class ProfileViewController: UIViewController {
     
-    let signOutButton = UIButton()
+    let settingsButton = UIButton()
+    
+    let userNameLabel = UILabel()
+    let userStatusLabel = UILabel()
+    let userBonusLabel = UILabel()
+    
+    let yourStatisticLabel = UILabel()
+    let firstLine = UIView()
+    let youSavedLabel = UILabel()
+    
+    let totalNumberLabel = UILabel()
+    let circleProgressView = CircleProgressView()
+    let infoTextPassed = UILabel()
+    
+    let treeImageView = UIImageView()
+    let numberOfTreesLabel = UILabel()
+    
+    let dropWaterImage = UIImageView()
+    let numberOfWaterLabel = UILabel()
+    
+    let lampImageView = UIImageView()
+    let numberOfElectroLabel = UILabel()
+    
+    let goalTextLabel = UILabel()
+    let goalNumberLabel = UILabel()
+    let secondLine = UIView()
+    
+    let shareTextLabel = UILabel()
+    let thirdLine = UIView()
+    let facebookLogoButton = UIButton()
+    let facebookTextButton = UIButton()
+    
+    var ref: DatabaseReference?
+    var userArray : [User] = []
+    var passedArray: [Passed] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
         configureConstraints()
+        SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.setDefaultAnimationType(.flat)
+        SVProgressHUD.setDefaultMaskType(.gradient)
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
-        if UserDefaults.standard.object(forKey: "userUID") == nil {
-            signOutButton.isHidden = true
+        if UserDefaults.standard.object(forKey: "userUID") != nil {
+            User.fetch(completion: { (result, error) in
+                guard let result = result else {
+                    print("error User fetching")
+                    return
+                }
+                self.userArray = result
+                self.settingAndFetchingData()
+            })
         }
     }
     
-    func configureView() {
-        signOutButton.backgroundColor = .black
-        signOutButton.setTitle("Log out", for: .normal)
-        signOutButton.setTitleColor(.white, for: .normal)
-        signOutButton.setTitleColor(.blue, for: .highlighted)
-        signOutButton.addTarget(self, action: #selector(logOutBTNpressed(sender:)), for: .touchUpInside)
+    func settingAndFetchingData() {
         
-        self.view.addSubview(signOutButton)
-    }
-    
-    func configureConstraints() {
-        signOutButton <- [
-            CenterX(0.0),
-            CenterY(0.0)
-        ]
-    }
-    
-    func logOutBTNpressed(sender: UIButton) {
-        do {
-            try Auth.auth().signOut()
+        if let currentUserId = UserDefaults.standard.object(forKey: "userUID") {
+            ref = Database.database().reference().child("Users").child(currentUserId as! String)
+        }
+        
+        for i in userArray {
             
-            if Auth.auth().currentUser == nil {
-                UserDefaults.standard.removeObject(forKey: "userUID")
-                UserDefaults.standard.synchronize()
+            let userBonus = i.bonus ?? 0
+            var userStatus = i.status ?? ""
+            let totalPassed = i.totalPassed ?? 0
+            var goalNumber = i.goalNumber ?? 0
+            var userName = i.userName ?? ""
+            
+            if userName == "" || userName.characters.count == 0 {
                 
-                let firstVC = FirstViewController()
-                present(firstVC, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Как вас зовут?", message: "Ваше имя будет отображено в рейтинге", preferredStyle: .alert)
+                
+            alert.addTextField { (textField: UITextField) in
+                textField.keyboardAppearance = .default
+                textField.keyboardType = .default
+                textField.autocorrectionType = .default
+                textField.placeholder = "Введите свое имя"
+                textField.clearButtonMode = .whileEditing
             }
-        } catch let signOutError as NSError {
-            print(signOutError.localizedDescription)
+                
+            let submitAction = UIAlertAction(title: "Подтвердить", style: .default, handler: { [weak self] (action) -> Void in
+                
+                // Get 1st TextField's text
+                let textField = alert.textFields![0]
+                userName = textField.text!
+                print(userName)
+                self?.ref?.child("userName").setValue(userName)
+            })
+                
+            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+                
+            alert.addAction(submitAction)
+            alert.addAction(cancelAction)
+                
+            self.present(alert, animated: false, completion: nil)
+            }
+            
+
+        switch totalPassed {
+        case 0...50:
+            userStatus = "Неравнодушный"
+            self.ref?.child("Status").setValue(userStatus)
+        case 51...100:
+            userStatus = "Вовлеченный"
+            self.ref?.child("Status").setValue(userStatus)
+        case 101...200:
+            userStatus = "Заботливый"
+            self.ref?.child("Status").setValue(userStatus)
+        case 201...500:
+            userStatus = "Эко-Герой"
+            self.ref?.child("Status").setValue(userStatus)
+        default:
+            userStatus = "Эко-Супергерой"
+            self.ref?.child("Status").setValue(userStatus)
         }
+        
+        //Setuping circleProgressView
+        var circleProgressValue = 0.0
+
+        if userStatus == "Неравнодушный" {
+
+            goalNumber = 51 - totalPassed
+            circleProgressValue = (Double((totalPassed * 100) / 50)) / 100
+
+        } else if userStatus == "Вовлеченный" {
+
+            goalNumber = 101 - totalPassed
+            circleProgressValue = (Double((totalPassed * 100) / 150)) / 100
+
+        } else if userStatus == "Заботливый" {
+
+            goalNumber = 201 - totalPassed
+            circleProgressValue = (Double((totalPassed * 100) / 300)) / 100
+
+        } else if userStatus == "Эко-Герой" {
+
+            goalNumber = 501 - totalPassed
+            circleProgressValue = (Double((totalPassed * 100) / 1000)) / 100
+        } else {
+            goalNumber = 5000 - totalPassed
+            circleProgressValue = (Double((totalPassed * 100) / 5000)) / 100
+        }
+        
+        circleProgressView.progress = circleProgressValue
+        
+        //What did you save? Compute from totalPassed
+        let savedTreeNumber = (totalPassed * 1) / 60
+        let savedWaterNumber = (totalPassed * 1200) / 60
+        let savedElectroNumber = (totalPassed * 60) / 60
+        
+        numberOfTreesLabel.text = "\(savedTreeNumber)"
+        numberOfElectroLabel.text = "\(savedElectroNumber) квт"
+        
+        //Formatter to short write
+        if totalPassed > 999 {
+            self.totalNumberLabel.text = "\(totalPassed / 1000)т \(totalPassed % 1000) кг"
+        } else if totalPassed < 1000 {
+            self.totalNumberLabel.text = "\(totalPassed) кг"
+        }
+        
+        if savedWaterNumber > 999 {
+            numberOfWaterLabel.text = "\(savedWaterNumber / 1000)м³ \(savedWaterNumber % 1000) л"
+        } else if savedWaterNumber < 1000 {
+            numberOfWaterLabel.text = "\(savedWaterNumber) л"
+        }
+        
+        self.userNameLabel.text = userName
+        self.userBonusLabel.text = "Бонусы: \(userBonus)"
+        self.userStatusLabel.text = "Статус: \(userStatus)"
+        self.goalNumberLabel.text = "\(goalNumber) кг"
+        
+        //Saving savedData in FireBase DataBase
+        self.ref?.child("Goal").setValue(goalNumber)
+        self.ref?.child("Total").setValue(totalPassed)
+        self.ref?.child("SavedTree").setValue(savedTreeNumber)
+        self.ref?.child("SavedWater").setValue(savedWaterNumber)
+        self.ref?.child("SavedElectro").setValue(savedElectroNumber)
+
+        }
+    }
+    
+    //Share setuping
+    func facebookBTNpressed(sender: UIButton) {
+        SVProgressHUD.show()
+        if let shareVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook) {
+            shareVC.setInitialText("#TazalykApp")
+            
+            shareVC.add(URL(string: "https://tazalyk.app.link/jcNZSJyHRF"))
+            present(shareVC, animated: true)
+        }
+        SVProgressHUD.dismiss(withDelay: 0.5)
+        
+    }
+
+    func settingsButtonPressed(sender: UIButton) {
+        let settingsNavigationController = UINavigationController(rootViewController: SettingsViewController())
+        settingsNavigationController.view.backgroundColor = UIColor.white
+        settingsNavigationController.tabBarItem.image = UIImage(named: "profileIbar")
+        settingsNavigationController.tabBarItem.selectedImage = UIImage(named: "profileIbarSelected")?.withRenderingMode(.alwaysOriginal)
+        
+        present(settingsNavigationController, animated: true, completion: nil)
+        
     }
 }

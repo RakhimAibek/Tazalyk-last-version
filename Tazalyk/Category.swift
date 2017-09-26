@@ -25,6 +25,7 @@ class Category: NSObject {
                     let castedObject = Category(name: i.value)
                     resultArray.append(castedObject)
                 }
+                resultArray.reverse()
                 completion(resultArray, nil)
             } else {
                 completion(nil, "fetch function error")

@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
+import StoreKit
 import Firebase
 import UserNotifications
+import SVProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDelegate {
@@ -48,7 +52,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         }
     
         FirebaseApp.configure()
+        Fabric.with([Crashlytics.self])
+        // TODO: Move this to where you establish a user session
         return true
+    }
+    
+    //Added from other example of project
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification notification: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        if Auth.auth().canHandleNotification(notification) {
+            completionHandler(UIBackgroundFetchResult.noData)
+            return
+        }
+        // This notification is not auth related, developer should handle it.
+    }
+    
+    func requestReview() {
+        SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.setDefaultAnimationType(.flat)
+        SVProgressHUD.setDefaultMaskType(.gradient)
+        SVProgressHUD.show(withStatus: "Секунду..")
+        
+        if #available(iOS 10.3, *) {
+            SVProgressHUD.dismiss(withDelay: 1.5)
+            SKStoreReviewController.requestReview()
+        } else {
+            // Fallback on earlier versions
+            SVProgressHUD.dismiss()
+            print("Rate is disable")
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

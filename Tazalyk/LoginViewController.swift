@@ -6,6 +6,7 @@
 
 import UIKit
 import EasyPeasy
+import SVProgressHUD
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -25,6 +26,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         setViews()
         setConstraints()
         numberTextField.delegate = self
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.setDefaultAnimationType(.flat)
+        SVProgressHUD.setDefaultMaskType(.gradient)
     }
     
     func setViews() {
@@ -49,7 +55,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         //NO textField setuping
         numberTextField.backgroundColor = UIColor(red: 248.0/255.0, green: 248.0/255.0, blue: 248.0/255.0, alpha: 1)
-//        numberTextField.layer.cornerRadius = 0
         numberTextField.layer.borderWidth = 1
         numberTextField.layer.borderColor = UIColor.white.cgColor
         numberTextField.placeholder = "Введите номер"

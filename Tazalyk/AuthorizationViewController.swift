@@ -10,6 +10,7 @@ import UIKit
 import EasyPeasy
 import FirebaseAuth
 import FirebaseDatabase
+import SVProgressHUD
 
 class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     
@@ -21,15 +22,19 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     let resendCodeButton = UIButton()
     let warningError = UILabel()
     let loginButton = UIButton()
+    let timerLabel = UILabel()
     
     var ref: DatabaseReference?
+    var time = 30
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        codeTextField.delegate = self
         setupViews()
         constraintsSetup()
+        codeTextField.delegate = self
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     //User starts to edit in textField
@@ -130,10 +135,17 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         resendCodeButton.titleLabel?.textAlignment = .center
         resendCodeButton.addTarget(self, action: #selector(resendCode(sender:)), for: .touchUpInside)
         
-        [backgroundImageView, overLayBackgroundView, logoImage, warningError, codeTextField, loginButton, resendPhoneButton, resendCodeButton].forEach {
+        //TimerLabel text
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actionTimer), userInfo: nil, repeats: true)
+        timerLabel.adjustsFontSizeToFitWidth = true
+        timerLabel.font = UIFont(name: "ProximaNova-Semibold", size: 16.0)
+        timerLabel.textColor = UIColor(red: 109.0/255.0, green: 168.0/255.0, blue: 207.0/255.0, alpha: 1.0)
+        
+        [backgroundImageView, overLayBackgroundView, logoImage, warningError, codeTextField, loginButton, resendPhoneButton, resendCodeButton, timerLabel].forEach {
             self.view.addSubview($0)
         }
     }
+    
     //MARK: -Constraints
     func constraintsSetup() {
         //backgroundImageView Constraints
@@ -153,7 +165,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         //WarningLabel constraints
         warningError <- [
             CenterX(0.0),
-            Bottom(4.0).to(codeTextField)
+            Bottom(25.0).to(codeTextField)
         ]
         
         //codeTextField Constraints
@@ -184,6 +196,24 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
             CenterX(0.0),
             Bottom(10)
         ]
+        
+        //TimerLabel 
+        timerLabel <- [
+            Bottom(7.0).to(codeTextField),
+            Right(33.0).to(view),
+            Left(33.0).to(view)
+        ]
+    }
+    
+    //ActionTimer
+    func actionTimer() {
+        time -= 1
+        timerLabel.text = "Переотправить код можно через 0:\(time) секунд"
+        
+        if time == 0  {
+            timer.invalidate()
+        }
+
     }
     
     
@@ -191,7 +221,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     func displayWarningLabel(with text: String) {
         warningError.text = text
         
-        UIView.animate(withDuration: 2, delay: 0, options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: 3, delay: 0, options: [.transitionFlipFromTop], animations: {
             [weak self] in
             
             self?.warningError.alpha = 1
@@ -207,37 +237,81 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         if codeTextField.text != "" && (codeTextField.text?.characters.count)! >= 6 {
             
             codeTextField.layer.borderColor = (UIColor(red: 74.0/255.0, green: 144.0/255.0, blue: 226.0/255.0, alpha: 1)).cgColor
+            SVProgressHUD.show(withStatus: "Проверяем код...")
             
             //MARK: -FireBase
             let defaults = UserDefaults.standard
             let defaultsString = defaults.string(forKey: "verificationId")
                 
             let credential: PhoneAuthCredential = PhoneAuthProvider.provider().credential(withVerificationID: defaultsString!, verificationCode: codeTextField.text!)
+            
             //Auth
             Auth.auth().signIn(with: credential, completion: { [weak self] (user, error) in
                 
-                if error != nil{
-                    print("Authorization error \(String(describing: error?.localizedDescription))")
-                } else {
-                    let userInfo = user?.providerData[0]
-                    print("ProviderId \(String(describing: userInfo?.providerID))")
+            if error != nil {
+                SVProgressHUD.showError(withStatus: "Код введен неверно..")
+                print("Authorization error \(String(describing: error?.localizedDescription))")
+                SVProgressHUD.dismiss(withDelay: 1.5)
+                
+            } else {
+                let userInfo = user?.providerData[0]
+                print("ProviderId \(String(describing: userInfo?.providerID))")
+                
+                Database.database().reference().child("Users").child((user?.uid)!).child("userRole").observeSingleEvent(of: .value, with: { (snapshot) in
                     
-                    //write in DataBase
-                    self?.ref = Database.database().reference()
-                    self?.ref?.child("Users").child((user?.uid)!).setValue(["PhoneNumber": user?.phoneNumber])
+                    if let userRole = snapshot.value as? String {
+                        print(userRole, "is role of user")
+                        
+                        if userRole == "admin" {
+                            
+                            let adminDefaults = UserDefaults.standard
+                            adminDefaults.set(Auth.auth().currentUser?.uid, forKey: "adminRole")
+                            adminDefaults.synchronize()
+                            
+                            SVProgressHUD.dismiss(completion: { 
+                                let adminVC = AdminViewController()
+                                self?.present(adminVC, animated: true, completion: nil)
+                            })
+                            
+                        } else {
+                            //write in DataBase
+                            self?.ref = Database.database().reference()
+                            self?.ref?.child("Users").child((user?.uid)!).child("PhoneNumber").setValue(user?.phoneNumber)
+                            self?.ref?.child("Users").child((user?.uid)!).child("userRole").setValue("user")
+                            
+                            //save user uid in UserDefaults
+                            defaults.set(Auth.auth().currentUser?.uid, forKey: "userUID")
+                            defaults.synchronize()
+                            
+                            SVProgressHUD.dismiss(completion: { 
+                                let tabBarVC = TabBarViewController()
+                                self?.present(tabBarVC, animated: true, completion: nil)
+                            })
+                        }
+                        
+                    } else {
+                        
+                        //write in DataBase
+                        self?.ref = Database.database().reference()
+                        self?.ref?.child("Users").child((user?.uid)!).child("PhoneNumber").setValue(user?.phoneNumber)
+                        self?.ref?.child("Users").child((user?.uid)!).child("userRole").setValue("user")
+                        
+                        //save user uid in UserDefaults
+                        defaults.set(Auth.auth().currentUser?.uid, forKey: "userUID")
+                        defaults.synchronize()
+                        
+                        SVProgressHUD.dismiss(completion: { 
+                            let tabBarVC = TabBarViewController()
+                            self?.present(tabBarVC, animated: true, completion: nil)
+                        })
+                       
+                    }
                     
-                    //save user uid in UserDefaults
-                    defaults.set(Auth.auth().currentUser?.uid, forKey: "userUID")
-                    defaults.synchronize()
-
-                    let tabBarVC = TabBarViewController()
-                    self?.present(tabBarVC, animated: true, completion: nil)
-                    
-                    
+                })
                 }
             })
             
-        } else {
+        } else if codeTextField.text! == "" || (codeTextField.text?.characters.count)! < 6 {
             displayWarningLabel(with: "Код должен быть 6-ти значным")
             codeTextField.layer.borderColor = UIColor.red.cgColor
         }
@@ -245,8 +319,22 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     
     //ReSendPhoneBTN pressed
     func resendPhoneNo(sender: UIButton) {
-        let loginVC = LoginViewController()
-        present(loginVC, animated: true, completion: nil)
+        
+        let resendPhoneAlert = UIAlertController(title: "Изменение номера", message: "Отправить код на другой номер?", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Да", style: .default, handler: { [weak self] (UIAlertAction) in
+            
+            let loginVC = LoginViewController()
+            self?.present(loginVC, animated: true, completion: nil)
+
+        })
+        
+        let cancel = UIAlertAction(title: "Нет", style: .destructive, handler: nil)
+        
+        resendPhoneAlert.addAction(action)
+        resendPhoneAlert.addAction(cancel)
+        self.present(resendPhoneAlert, animated: true, completion: nil)
+    
     }
     
     //ResendCodeBTN pressed
