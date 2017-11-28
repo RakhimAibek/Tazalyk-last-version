@@ -36,7 +36,7 @@ extension LoginViewController {
                 PhoneAuthProvider.provider().verifyPhoneNumber("\(userNumber)", completion: { (verificationCode, error) in
                     
                     if error != nil {
-                        
+                        print(error.debugDescription, "debug error desc")
                         SVProgressHUD.showError(withStatus: "Ошибка.. Попробуйте еще")
                         SVProgressHUD.dismiss(withDelay: 1.5)
                         print("Verification error \(String(describing: error?.localizedDescription))")
@@ -46,6 +46,7 @@ extension LoginViewController {
                         //MARK: UserDefaults
                         let defaults = UserDefaults.standard
                         defaults.set(verificationCode!, forKey: "verificationId")
+                        print(verificationCode!, "verification code")
                         SVProgressHUD.dismiss(completion: {
                             SVProgressHUD.showSuccess(withStatus: "Код успешно отправлен")
                             SVProgressHUD.dismiss(withDelay: 1.5)

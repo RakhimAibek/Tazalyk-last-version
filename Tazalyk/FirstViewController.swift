@@ -28,6 +28,8 @@ class FirstViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         UIApplication.shared.statusBarStyle = .lightContent
+        
+
 
     }
     
@@ -43,6 +45,7 @@ class FirstViewController: UIViewController {
             let adminVC = AdminViewController()
             present(adminVC, animated: true, completion: nil)
         }
+
     }
     
     func createGradientLayer() {

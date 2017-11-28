@@ -37,7 +37,7 @@ class SettingsViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "backButton"), style: .plain, target: self, action: #selector(backButtonPressed(sender:)))
         
         //Custing only one word
-        let myText = "Tazalyk - сдавая мусор в пункты приема, зарабатывайте деньги и бонусы"
+        let myText = "Tazalyk - сдавая мусор в пункты приема, зарабатывайте деньги и бонусы, обменивайте бонусы на ценные призы!"
         let myFont = UIFont(name: "ProximaNova-Regular", size: 16.0)
         
         let myAttr = [
@@ -50,11 +50,11 @@ class SettingsViewController: UIViewController {
         print(myMutableString)
         
         textDescriptionLabel.attributedText = myMutableString
-        textDescriptionLabel.numberOfLines = 3
+        textDescriptionLabel.numberOfLines = 0
         textDescriptionLabel.textAlignment = .center
         
         //Rate button
-        rateButton.setTitle("Оценить", for: .normal)
+        rateButton.setTitle("Оставить отзыв", for: .normal)
         rateButton.setTitleColor(.white, for: .normal)
         rateButton.setTitleColor(UIColor(red: 219.0/255, green: 219.0/255, blue: 219.0/255, alpha: 0.7), for: .highlighted)
         rateButton.addTarget(self, action: #selector(rateButtonPressed(sender:)), for: .touchUpInside)
@@ -63,10 +63,11 @@ class SettingsViewController: UIViewController {
         rateButton.layer.cornerRadius = 7.0
         
         //TextRate UILabel
-        textRateLabel.text = "Заранее спасибо за 5 звезд :)"
+        textRateLabel.text = "Заранее спасибо за Ваш отзыв в AppStore"
         textRateLabel.font = UIFont(name: "ProximaNova-Regular", size: 14.0)
         textRateLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
         textRateLabel.textAlignment = .center
+        textRateLabel.numberOfLines = 0
         
         [textDescriptionLabel, rateButton, textRateLabel].forEach {
             self.view.addSubview($0)
@@ -126,7 +127,7 @@ class SettingsViewController: UIViewController {
             }
         })
 
-        let cancel = UIAlertAction(title: "Нет", style: .default, handler: nil)
+        let cancel = UIAlertAction(title: "Нет", style: .destructive, handler: nil)
 
         alert.addAction(action)
         alert.addAction(cancel)

@@ -19,17 +19,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
 
     var window: UIWindow?
     var firstNavigationController: UINavigationController?
+    var firstViewController: UIViewController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.firstNavigationController = UINavigationController()
-        let firstViewController = FirstViewController()
         
+        //hide or not hide onboarding pages
+        if UserDefaults.standard.object(forKey: "onboardingDefaults") != nil {
+            firstViewController = FirstViewController()
+        } else if UserDefaults.standard.object(forKey: "onboardingDefaults") == nil {
+            firstViewController = OnboardingVC()
+        }
+
         if let firstNavigationController = self.firstNavigationController {
             
             firstNavigationController.delegate = self
             firstNavigationController.setNavigationBarHidden(true, animated: false)
-            firstNavigationController.pushViewController(firstViewController, animated: false)
+            firstNavigationController.pushViewController(firstViewController!, animated: false)
             
             self.window = UIWindow(frame: UIScreen.main.bounds)
             
@@ -42,8 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         
         //UserNotification
         if #available(iOS 10, *) {
-            UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { (granted, error) in
-                application.registerForRemoteNotifications()
+            let authOptions: UNAuthorizationOptions = [.badge, .sound, .alert]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { (granted, error) in
+                    application.registerForRemoteNotifications()
             })
         } else {
                 let notificationSettings = UIUserNotificationSettings(types: [.badge, .alert, .sound], categories: nil)
@@ -52,11 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         }
     
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         Fabric.with([Crashlytics.self])
         // TODO: Move this to where you establish a user session
         return true
     }
-    
+
     //Added from other example of project
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.prod)

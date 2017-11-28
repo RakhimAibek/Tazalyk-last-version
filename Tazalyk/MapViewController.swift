@@ -30,11 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     var selectedIndexItem = Int()
     var selectedIndexPath:Int?
-    var categoryArray: [Category] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var categoryArray: [Category] = [] 
     
     var pinArray = [Pin]()
     var filteredArrayOfPin = [Pin]()
@@ -45,7 +41,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         UIApplication.shared.statusBarStyle = .default
     
-        
         SVProgressHUD.setDefaultStyle(.light)
         SVProgressHUD.setDefaultAnimationType(.flat)
         SVProgressHUD.setDefaultMaskType(.gradient)
@@ -53,13 +48,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         determineMyCurrentLocation()
         
         //Category fetching
-        Category.fetch { (result, error) in
-            if let res = result {
-                self.categoryArray = res
-            } else {
-                print(error ?? "error category fetching")
-            }
-        }
+        self.categoryArray = Category.loadCategories()
         
         Pin.fetch { pins, error in
             guard let pins = pins else {
@@ -89,6 +78,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if annotation is MKUserLocation {
             return nil
         }
+        
         let ant = annotation as? Pin
         //MARK: Customizing the pins view
         let annotationIdentifier = "AnnotationIdentifier"
@@ -98,7 +88,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             annotationView?.canShowCallout = true
 
-            if ant?.sales == "yes" {
+            if ant?.sale == "yes" {
                 annotationView?.image = UIImage(named: "yes")
             } else {
                 annotationView?.image = UIImage(named: "no")
@@ -109,7 +99,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotationView?.rightCalloutAccessoryView = btn
             
         } else {
-            if ant?.sales == "yes" {
+            if ant?.sale == "yes" {
                 annotationView?.image = UIImage(named: "yes")
             } else {
                 annotationView?.image = UIImage(named: "no")
@@ -121,9 +111,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if case .authorizedWhenInUse = status {
-            locationManager.requestLocation()
-        }
+        
+            if status == .notDetermined {
+                locationManager.requestWhenInUseAuthorization()
+            } else if status == .denied {
+                setUserLocationStatus()
+            }
+
+    }
+    
+    func setUserLocationStatus() {
+        let alert = UIAlertController(title: "Доступ к вашему местоположению был отключен", message: "Пожалуйста откройте настройки и дайте разрешение Tazalyk использовать вашу текущую геопозицию.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Разрешить ", style: UIAlertActionStyle.default, handler: { (alert: UIAlertAction!) in
+            print("")
+            UIApplication.shared.openURL(NSURL(string: UIApplicationOpenSettingsURLString)! as URL)
+        }))
+        present(alert, animated: true, completion: nil)
     }
     
     func infoPressed() {
@@ -149,12 +152,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsUserLocation = true
         mapView.showsBuildings = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         } else if !CLLocationManager.locationServicesEnabled() {
-            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
         }
     }
     
@@ -184,8 +187,8 @@ extension MapViewController: UICollectionViewDataSource, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CategoryCollectionCell
         cell.backgroundColor = .white
   
-        categoryArray.forEach() {_ in
-            cell.imageView.image = UIImage(named: categoryArray[indexPath.item].name!)
+        categoryArray.forEach { _ in
+            cell.imageView.image = UIImage(named: categoryArray[indexPath.item].id!)
             cell.categoryTitleLabel.text = categoryArray[indexPath.item].name
         }
 
@@ -215,19 +218,47 @@ extension MapViewController: UICollectionViewDataSource, UICollectionViewDelegat
         
         if selectedIndexItem == indexPath.item {
             selectedCell?.backgroundColor = UIColor(red: 208.0/255.0, green: 220.0/255.0, blue: 241.0/255.0, alpha: 1.0)
-            selectedCell?.imageView.image = UIImage(named: categoryArray[indexPath.item].name!+"1")
+            selectedCell?.imageView.image = UIImage(named: categoryArray[indexPath.item].id!+"s")
             valueCategory = (selectedCell?.categoryTitleLabel.text)!
+            
+            switch valueCategory {
+            case "Все":
+                valueCategory = "000"
+            case "Макулатура":
+                valueCategory = "001"
+            case "Пластик":
+                valueCategory = "002"
+            case "Электроника":
+                valueCategory = "003"
+            case "Стекло":
+                valueCategory = "004"
+            case "Опасные":
+                valueCategory = "005"
+            case "Медицинские":
+                valueCategory = "006"
+            case "Металл":
+                valueCategory = "007"
+            default:
+                valueCategory = "008"
+            }
+        
         }
         
         let filtered = pinArray.filter {
-            let categories = $0.category?.name?.components(separatedBy: ",")
+            let categories = $0.categories?.components(separatedBy: ",")
             return (categories?.contains(self.valueCategory))!
         }
-        
-
         self.filteredArrayOfPin = filtered
-        self.mapView.removeAnnotations(mapView.annotations)
-        self.mapView.addAnnotations(self.valueCategory.isEmpty ? pinArray : filteredArrayOfPin)
+        
+        if valueCategory == "000" {
+            self.mapView.removeAnnotations(mapView.annotations)
+            self.mapView.addAnnotations(pinArray)
+        } else {
+            self.mapView.removeAnnotations(mapView.annotations)
+            self.mapView.addAnnotations(self.valueCategory.isEmpty ? pinArray : filteredArrayOfPin)
+        }
+
+
     
     }
     
@@ -236,7 +267,7 @@ extension MapViewController: UICollectionViewDataSource, UICollectionViewDelegat
         
         let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionCell
     
-        selectedCell?.imageView.image = UIImage(named: categoryArray[indexPath.item].name!)
+        selectedCell?.imageView.image = UIImage(named: categoryArray[indexPath.item].id!)
         selectedCell?.backgroundColor = UIColor.white
         
         collectionView.reloadItems(at: [indexPath])

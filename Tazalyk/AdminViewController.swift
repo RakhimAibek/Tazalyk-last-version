@@ -163,31 +163,21 @@ class AdminViewController: UIViewController, UITextFieldDelegate {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         let resultDate = formatter.string(from: date)
+        var bonusNumber = 0
         
-        let bonusNumber: Int = Int(typeNumberOfBonus.text!)!
+        if let unwrappedbonusNumber = Int(typeNumberOfBonus.text!) {
+            bonusNumber = unwrappedbonusNumber
+        }
         
         var userArr = [User]()
         var selectedUserId: User?
         
         var idArray = [String]()
-        var selectedId: String?
+        var selectedId = ""
         
         self.ref = Database.database().reference()
-        var type = ""
-        
-        if boolValue == true {
-            type = "PassedTrash"
-            
-        } else {
-            type = "Passed"
-            
-        }
         
         let userRef = Database.database().reference().child("Users")
-        ref = ref?.child(type).child(phoneNumberTextField.text ?? "").childByAutoId()
-        
-        ref?.setValue(["Amount": bonusNumber, "whenPassed": resultDate], withCompletionBlock: { (error, reference) in
-                
         userRef.observeSingleEvent(of: .value, with: { (snapshot) in
             
             for i in snapshot.children {
@@ -196,49 +186,61 @@ class AdminViewController: UIViewController, UITextFieldDelegate {
                 idArray.append((i as AnyObject).key)
             }
             
-            
             for i in userArr {
                 if i.phoneNumber == self.phoneNumberTextField.text {
                     selectedUserId = i
+                    selectedId = idArray[(userArr.index{$0 === selectedUserId})!]
                 }
+                
             }
             
-            selectedId = idArray[(userArr.index{$0 === selectedUserId})!]
-            
-            print(selectedId!, "SelectedId")
-            
-            if type == "PassedTrash" {
+            if boolValue == true {
                 
-                userRef.child(selectedId!).observeSingleEvent(of: .value, with: { (snapshot) in
+                if selectedId != "" {
+                userRef.child(selectedId).observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let user = User(snapshot: snapshot)
-                    userRef.child(selectedId!).updateChildValues(["Bonus": user.bonus! + bonusNumber, "Total": user.totalPassed! + bonusNumber])
+                    userRef.child(selectedId).updateChildValues(["bonus": user.bonus! + bonusNumber, "total": user.total! + bonusNumber])
                     
                 })
+                }
                 
             } else {
-                Database.database().reference().child("Users").child(selectedId!).child("Bonus").observeSingleEvent(of: .value, with: { (snapshot) in
+                if selectedId != "" {
+                Database.database().reference().child("Users").child(selectedId).child("bonus").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let userBonus = snapshot.value as? Int ?? 0
-                    print(userBonus, "UserBonus")
                     
-                    Database.database().reference().child("Users").child(selectedId!).child("Bonus").setValue(userBonus-bonusNumber)
+                    Database.database().reference().child("Users").child(selectedId).child("bonus").setValue(userBonus-bonusNumber)
                     
                 })
+                }
+                
             }
+            
         })
-    })
 }
     
     //Substract bonus
     func sendBTNpressed(sender: UIButton) {
+        let alert = UIAlertController(title: "Проведение транзакций", message: "Вы подтверждаете свое действие?", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Да", style: .default, handler: { [weak self] (UIAlertAction) in
+            
+            if sender.currentTitle == "Отнять" {
+                self?.configureDatabase(boolValue: false)
+            } else {
+                self?.configureDatabase(boolValue: true)
+            }
+            
+        })
         
-        if sender.currentTitle == "Отнять" {
-            configureDatabase(boolValue: false)
-        } else {
-            configureDatabase(boolValue: true)
-        }
-
+        let cancel = UIAlertAction(title: "Нет", style: .destructive, handler: nil)
+        
+        alert.addAction(action)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated: false, completion: nil)
+    
     }
     
     func logOutBTNpressed(sender: UIButton) {
@@ -247,7 +249,6 @@ class AdminViewController: UIViewController, UITextFieldDelegate {
         let action = UIAlertAction(title: "Да", style: .default, handler: { [weak self] (UIAlertAction) in
             
             do {
-                
                 try Auth.auth().signOut()
                 
                 if Auth.auth().currentUser == nil {
@@ -263,7 +264,7 @@ class AdminViewController: UIViewController, UITextFieldDelegate {
             }
         })
         
-        let cancel = UIAlertAction(title: "Нет", style: .default, handler: nil)
+        let cancel = UIAlertAction(title: "Нет", style: .destructive, handler: nil)
         
         alert.addAction(action)
         alert.addAction(cancel)

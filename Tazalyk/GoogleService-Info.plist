@@ -7,34 +7,34 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>998202841052-phguj4r44jebnq0j8qpilne2lf7d2m26.apps.googleusercontent.com</string>
+	<string>894664352481-ojgks6kvahor58ghm1l3r9hesq5ibvll.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.998202841052-phguj4r44jebnq0j8qpilne2lf7d2m26</string>
+	<string>com.googleusercontent.apps.894664352481-ojgks6kvahor58ghm1l3r9hesq5ibvll</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBmhCzOV61DFvnW4eAA8LGe9evA0wLqBh0</string>
+	<string>AIzaSyBPYszNTWjb271_OY421ll3g0X2BjI0u8M</string>
 	<key>GCM_SENDER_ID</key>
-	<string>998202841052</string>
+	<string>894664352481</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>kz.ibek.Tazalyk</string>
 	<key>PROJECT_ID</key>
-	<string>tazalyk-efffd</string>
+	<string>tazalyk-95a5a</string>
 	<key>STORAGE_BUCKET</key>
-	<string>tazalyk-efffd.appspot.com</string>
+	<string>tazalyk-95a5a.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:998202841052:ios:1f9994c530adf1f7</string>
+	<string>1:894664352481:ios:1f9994c530adf1f7</string>
 	<key>DATABASE_URL</key>
-	<string>https://tazalyk-efffd.firebaseio.com</string>
+	<string>https://tazalyk-95a5a.firebaseio.com</string>
 </dict>
 </plist>

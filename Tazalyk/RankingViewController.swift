@@ -14,7 +14,6 @@ import FirebaseDatabase
 class RankingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let backgroundCupImage = UIImageView()
-    let overLayView = UIView()
     let textLabel = UILabel()
     let scoreTableView = UITableView()
     
@@ -33,43 +32,34 @@ class RankingViewController: UIViewController, UITableViewDataSource, UITableVie
         scoreTableView.delegate = self
         scoreTableView.dataSource = self
         scoreTableView.register(RankingTableViewCell.self, forCellReuseIdentifier: "myCell")
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         fetchAllusers()
     }
     
     func configureView() {
         
-        backgroundCupImage.image = UIImage(named: "cupImage")
-        backgroundCupImage.contentMode = .scaleAspectFit
-        backgroundCupImage.alpha = 0.23
-        overLayView.backgroundColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.47)
-        
         //UILabel text of Best
-        textLabel.text = "Лучшие"
+        textLabel.text = "Лучшие Эко-Пользователи"
         textLabel.textColor = .black
         textLabel.font = UIFont(name: "ProximaNova-Bold", size: 18.0)
         
         //UITableView
-        scoreTableView.backgroundColor = .white
-        scoreTableView.alpha = 0.66
+        scoreTableView.backgroundView = UIImageView(image: UIImage(named: "cupImage"))
+        scoreTableView.backgroundView?.alpha = 0.14
+        scoreTableView.alpha = 1
         
         
-        [backgroundCupImage, overLayView, textLabel, scoreTableView].forEach {
+        [backgroundCupImage, textLabel, scoreTableView].forEach {
             self.view.addSubview($0)
         }
     }
     
     //Fetching all users from FirebaseDatabase and sorting it
     func fetchAllusers() {
-        if userArr.isEmpty == false {
-            print("don`t need to SVP")
-        } else {
-            SVProgressHUD.show(withStatus: "Загружаю..")
-        }
-        
         
         let userRef = Database.database().reference().child("Users")
         userRef.observe(.value, with: { (snapshot) in
@@ -80,11 +70,11 @@ class RankingViewController: UIViewController, UITableViewDataSource, UITableVie
             }
             
             let filtered = self.userArr.filter({ (user1) -> Bool in
-                return user1.totalPassed! > 0
+                return user1.total! > 0
             })
             
             let deepFiltered = filtered.sorted(by: { (user1, user2) -> Bool in
-                return user1.totalPassed! > user2.totalPassed!
+                return user1.total! > user2.total!
             })
 
             self.userArr = []
@@ -95,7 +85,6 @@ class RankingViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.scoreTableView.reloadData()
             }
         })
-        SVProgressHUD.dismiss()
     }
     
     func configureConstraints() {
@@ -103,7 +92,6 @@ class RankingViewController: UIViewController, UITableViewDataSource, UITableVie
            Edges()
         ]
         
-        overLayView <- Edges()
         
         textLabel <- [
             Top(40.0),
@@ -135,26 +123,31 @@ class RankingViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let sortedUser = filteredUsers[indexPath.row]
         
-        if let userNickName = sortedUser.userName, let passedTrash = sortedUser.totalPassed {
+        if let userNickName = sortedUser.userName, let passedTrash = sortedUser.total {
             
             cell.userNameLabel.text = userNickName
-            cell.passedStatisticLabel.text = "Статус: \(sortedUser.status ?? ""), \(passedTrash) кг сдано"
+            var userStatus = ""
             
-            switch sortedUser.status ?? "" {
-            case "Неравнодушный":
+            switch passedTrash {
+            case 0...50:
+                userStatus = "Неравнодушный"
                 cell.statusImageView.image = UIImage(named: "неравнодушный")
-            case "Вовлеченный":
+            case 51...100:
+                userStatus = "Вовлеченный"
                 cell.statusImageView.image = UIImage(named: "вовлеченный")
-            case "Заботливый":
+            case 101...200:
+                userStatus = "Заботливый"
                 cell.statusImageView.image = UIImage(named: "заботливый")
-            case "Эко-Герой":
+            case 201...500:
+                userStatus = "Эко-Герой"
                 cell.statusImageView.image = UIImage(named: "эко-герой")
-            case "Эко-Супергерой":
-                cell.statusImageView.image = UIImage(named: "супергерой")
             default:
-                cell.statusImageView.image = UIImage(named: "no-image")
+                userStatus = "Эко-Супергерой"
+                cell.statusImageView.image = UIImage(named: "супергерой")
             }
+            cell.backgroundColor = .clear
             
+            cell.passedStatisticLabel.text = "Статус: \(userStatus), \(passedTrash) кг сдано"
             
         }
   

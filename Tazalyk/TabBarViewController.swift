@@ -16,6 +16,7 @@ class TabBarViewController: UITabBarController {
         
         //MARK: -Setting TabBat ViewControllers
         let mapVC = MapViewController()
+
         mapVC.view.backgroundColor = UIColor.lightGray
         mapVC.tabBarItem.image = UIImage(named: "mapIbar")
         mapVC.tabBarItem.selectedImage = UIImage(named: "mapIbarSelected")?.withRenderingMode(.alwaysOriginal)

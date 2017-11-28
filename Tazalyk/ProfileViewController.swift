@@ -87,12 +87,12 @@ class ProfileViewController: UIViewController {
         for i in userArray {
             
             let userBonus = i.bonus ?? 0
-            var userStatus = i.status ?? ""
-            let totalPassed = i.totalPassed ?? 0
-            var goalNumber = i.goalNumber ?? 0
+            let totalPassed = i.total ?? 0
             var userName = i.userName ?? ""
+            var userStatus = ""
+            var goalNumber = 0
             
-            if userName == "" || userName.characters.count == 0 {
+            if userName == "" || userName.characters.count == 0 || userName.characters.count < 2 {
                 
             let alert = UIAlertController(title: "Как вас зовут?", message: "Ваше имя будет отображено в рейтинге", preferredStyle: .alert)
                 
@@ -119,25 +119,21 @@ class ProfileViewController: UIViewController {
             alert.addAction(cancelAction)
                 
             self.present(alert, animated: false, completion: nil)
+                
             }
             
 
         switch totalPassed {
         case 0...50:
             userStatus = "Неравнодушный"
-            self.ref?.child("Status").setValue(userStatus)
         case 51...100:
             userStatus = "Вовлеченный"
-            self.ref?.child("Status").setValue(userStatus)
         case 101...200:
             userStatus = "Заботливый"
-            self.ref?.child("Status").setValue(userStatus)
         case 201...500:
             userStatus = "Эко-Герой"
-            self.ref?.child("Status").setValue(userStatus)
         default:
             userStatus = "Эко-Супергерой"
-            self.ref?.child("Status").setValue(userStatus)
         }
         
         //Setuping circleProgressView
@@ -167,7 +163,7 @@ class ProfileViewController: UIViewController {
             circleProgressValue = (Double((totalPassed * 100) / 5000)) / 100
         }
         
-        circleProgressView.progress = circleProgressValue
+        circleProgressView.setProgress(circleProgressValue, animated: true)
         
         //What did you save? Compute from totalPassed
         let savedTreeNumber = (totalPassed * 1) / 60
@@ -196,11 +192,7 @@ class ProfileViewController: UIViewController {
         self.goalNumberLabel.text = "\(goalNumber) кг"
         
         //Saving savedData in FireBase DataBase
-        self.ref?.child("Goal").setValue(goalNumber)
-        self.ref?.child("Total").setValue(totalPassed)
-        self.ref?.child("SavedTree").setValue(savedTreeNumber)
-        self.ref?.child("SavedWater").setValue(savedWaterNumber)
-        self.ref?.child("SavedElectro").setValue(savedElectroNumber)
+        self.ref?.child("total").setValue(totalPassed)
 
         }
     }

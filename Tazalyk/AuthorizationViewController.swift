@@ -25,7 +25,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     let timerLabel = UILabel()
     
     var ref: DatabaseReference?
-    var time = 30
+    var time = 40
     var timer = Timer()
     
     override func viewDidLoad() {
@@ -35,6 +35,9 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         constraintsSetup()
         codeTextField.delegate = self
         UIApplication.shared.statusBarStyle = .lightContent
+        SVProgressHUD.setDefaultStyle(.light)
+        SVProgressHUD.setDefaultAnimationType(.flat)
+        SVProgressHUD.setDefaultMaskType(.gradient)
     }
     
     //User starts to edit in textField
@@ -276,7 +279,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
                         } else {
                             //write in DataBase
                             self?.ref = Database.database().reference()
-                            self?.ref?.child("Users").child((user?.uid)!).child("PhoneNumber").setValue(user?.phoneNumber)
+                            self?.ref?.child("Users").child((user?.uid)!).child("phoneNumber").setValue(user?.phoneNumber)
                             self?.ref?.child("Users").child((user?.uid)!).child("userRole").setValue("user")
                             
                             //save user uid in UserDefaults
@@ -293,7 +296,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
                         
                         //write in DataBase
                         self?.ref = Database.database().reference()
-                        self?.ref?.child("Users").child((user?.uid)!).child("PhoneNumber").setValue(user?.phoneNumber)
+                        self?.ref?.child("Users").child((user?.uid)!).child("phoneNumber").setValue(user?.phoneNumber)
                         self?.ref?.child("Users").child((user?.uid)!).child("userRole").setValue("user")
                         
                         //save user uid in UserDefaults
@@ -339,6 +342,6 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     
     //ResendCodeBTN pressed
     func resendCode(sender: UIButton) {
-        //TODO: Alert
+        self.navigationController?.popViewController(animated: true)
     }
 }

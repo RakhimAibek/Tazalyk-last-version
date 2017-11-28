@@ -11,46 +11,45 @@ import FirebaseDatabase
 
 class Pin: NSObject, MKAnnotation {
     
-    var category: Category?
+    var categories: String?
     var title: String?
     var coordinate: CLLocationCoordinate2D
     var address: String?
-    var timeTable: String?
-    var contactInfo: String?
+    var timetable: String?
+    var contact: String?
     var imageLink: String?
-    var sales: String?
+    var sale: String?
     
-    init(title: String, coordinate: CLLocationCoordinate2D, category: Category, address: String, timeTable: String, contactInfo: String, imageLink: String, sales: String) {
+    init(title: String, coordinate: CLLocationCoordinate2D, categories: String, address: String, timetable: String, contact: String, imageLink: String, sale: String) {
         self.title = title
-        self.category = category
+        self.categories = categories
         self.coordinate = coordinate
         self.address = address
-        self.timeTable = timeTable
-        self.contactInfo = contactInfo
+        self.timetable = timetable
+        self.contact = contact
         self.imageLink = imageLink
-        self.sales = sales
+        self.sale = sale
     }
     
     init(dictionary: [String: Any]) {
 
         let coordinateData = dictionary["coordinate"] as? [String: Double]
-        self.coordinate = CLLocationCoordinate2D(latitude: (coordinateData?["latitude"] ?? 0),
-                                                 longitude: (coordinateData?["longtitude"] ?? 0))
-        
+        self.coordinate = CLLocationCoordinate2D(latitude: (coordinateData?["lat"] ?? 0),
+                                                 longitude: (coordinateData?["long"] ?? 0))
         self.title = dictionary["title"] as? String
-        category = Category(name:( dictionary["category"] as? String))
+        categories = dictionary["categories"] as? String
         self.address = dictionary["address"] as? String
-        self.contactInfo = dictionary["contact"] as? String
-        self.timeTable = dictionary["timeTable"] as? String
+        self.contact = dictionary["contact"] as? String
+        self.timetable = dictionary["timetable"] as? String
         self.imageLink = dictionary["imageLink"] as? String
-        self.sales = dictionary["sales"] as? String
+        self.sale = dictionary["sale"] as? String
         
         super.init()
     }
     
     static func fetch(completion: @escaping (([Pin]?, String?) -> Void)) {
-        Database.database().reference().child("Pins").observeSingleEvent(of: .value, with: { (snapshot) in
-            
+        Database.database().reference().child("Pins").observe(.value, with: { (snapshot) in
+
             if let pinsDict = snapshot.value as? [String: [String: Any]] {
                 var pins = [Pin]()
                 for i in pinsDict {
@@ -60,9 +59,26 @@ class Pin: NSObject, MKAnnotation {
                 completion(pins, nil)
                 return
             }
-            
+
             completion(nil, "Fetching error occured")
         })
+        
+//        Database.database().reference().child("Pins").observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//            if let pinsDict = snapshot.value as? [String: [String: Any]] {
+//                var pins = [Pin]()
+//                for i in pinsDict {
+//                    let pin = Pin(dictionary: i.value)
+//                    pins.append(pin)
+//                }
+//                completion(pins, nil)
+//                return
+//            }
+//
+//            completion(nil, "Fetching error occured")
+//        })
+
+        
     }
 }
 

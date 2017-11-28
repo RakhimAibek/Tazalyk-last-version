@@ -15,33 +15,25 @@ class User
     var userName: String?
     var phoneNumber: String?
     var userRole: String?
-    var status: String?
     var bonus: Int?
-    var address: String?
-    var totalPassed: Int?
-    var goalNumber: Int?
+    var total: Int?
     
-    init(userName: String, phoneNumber: String, userRole: String, status: String, bonus: Int, totalPassed: Int, goalNumber: Int) {
+    init(userName: String, phoneNumber: String, userRole: String, bonus: Int, total: Int) {
         self.userName = userName
         self.phoneNumber = phoneNumber
         self.userRole = userRole
-        self.status = status
         self.bonus = bonus
-        self.totalPassed = totalPassed
-        self.goalNumber = goalNumber
+        self.total = total
     }
     
     init(snapshot: DataSnapshot){
         
         let data = snapshot.value as? NSDictionary
         self.userName = data?["userName"] as? String ?? ""
-        self.phoneNumber = data?["PhoneNumber"] as? String ?? ""
+        self.phoneNumber = data?["phoneNumber"] as? String ?? ""
         self.userRole = data?["userRole"] as? String ?? ""
-        self.bonus = data?["Bonus"] as? Int ?? 0
-        self.status = data?["Status"] as? String ?? ""
-        self.totalPassed = data?["Total"] as? Int ?? 0
-        self.goalNumber = data?["Goal"] as? Int ?? 0
-
+        self.bonus = data?["bonus"] as? Int ?? 0
+        self.total = data?["total"] as? Int ?? 0
     }
     
     static func fetch(completion: @escaping (([User]?, String?) -> Void)) {
@@ -56,14 +48,12 @@ class User
                 var resultArray: [User] = []
                 
                 let userName = data["userName"] as? String ?? ""
-                let phoneNumber = data["PhoneNumber"] as? String ?? ""
+                let phoneNumber = data["phoneNumber"] as? String ?? ""
                 let userRole = data["userRole"] as? String ?? ""
-                let userBonus = data["Bonus"] as? Int ?? 0
-                let userStatus = data["Status"] as? String ?? ""
-                let totalPassed = data["Total"] as? Int ?? 0
-                let goalNumber = data["Goal"] as? Int ?? 0
+                let userBonus = data["bonus"] as? Int ?? 0
+                let totalPassed = data["total"] as? Int ?? 0
                 
-                let castedObject = User(userName: userName, phoneNumber: phoneNumber, userRole: userRole, status: userStatus, bonus: userBonus, totalPassed: totalPassed, goalNumber: goalNumber)
+                let castedObject = User(userName: userName, phoneNumber: phoneNumber, userRole: userRole, bonus: userBonus, total: totalPassed)
                 
                 resultArray.append(castedObject)
                 completion(resultArray, nil)
@@ -76,4 +66,5 @@ class User
         })
         }
     }
+
 }

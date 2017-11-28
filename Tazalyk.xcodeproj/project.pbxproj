@@ -12,6 +12,10 @@
 		E3057A611F61AACC006E0955 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3057A5F1F61AACC006E0955 /* Crashlytics.framework */; };
 		E3370F5D1F3D829D00DC279E /* ProfileVC+configureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3370F5C1F3D829D00DC279E /* ProfileVC+configureView.swift */; };
 		E3370F5F1F3F74F200DC279E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3370F5E1F3F74F200DC279E /* User.swift */; };
+		E3784D8E1F8693C0007D5532 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3784D8D1F8693C0007D5532 /* OnboardingVC.swift */; };
+		E3784D901F869790007D5532 /* OnboardingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3784D8F1F869790007D5532 /* OnboardingCollectionCell.swift */; };
+		E3784D921F878274007D5532 /* PageOnboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3784D911F878274007D5532 /* PageOnboard.swift */; };
+		E3A539011F7D214A002079EA /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = E33800921F7D1B150013D209 /* GoogleService-Info.plist */; };
 		E3B369191F2BB83700C6C7C5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B369181F2BB83700C6C7C5 /* MapViewController.swift */; };
 		E3B77EF91F344B24008B1937 /* MapVC+configureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B77EF81F344B24008B1937 /* MapVC+configureView.swift */; };
 		E3B9C5B91F21D66C00A69ABC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9C5B81F21D66C00A69ABC /* AppDelegate.swift */; };
@@ -21,7 +25,6 @@
 		E3D6736F1F2945BF00D9C0B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6736E1F2945BF00D9C0B9 /* LoginViewController.swift */; };
 		E3D673721F29CA7F00D9C0B9 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D673711F29CA7F00D9C0B9 /* Storyboard.storyboard */; };
 		E3ED7C8A1F2A6BB300DD5A56 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED7C891F2A6BB300DD5A56 /* AuthorizationViewController.swift */; };
-		E3ED7C8E1F2B58E300DD5A56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3ED7C8D1F2B58E300DD5A56 /* GoogleService-Info.plist */; };
 		E3ED7C901F2B661E00DD5A56 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ED7C8F1F2B661E00DD5A56 /* TabBarViewController.swift */; };
 		E3F713C21F4327FA00377618 /* NotRegisteredProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F713C11F4327FA00377618 /* NotRegisteredProfileVC.swift */; };
 		E3F713C41F462FAF00377618 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F713C31F462FAF00377618 /* SettingsViewController.swift */; };
@@ -52,6 +55,10 @@
 		E32F476A1F266FFC00E6E605 /* Tazalyk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tazalyk.entitlements; sourceTree = "<group>"; };
 		E3370F5C1F3D829D00DC279E /* ProfileVC+configureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileVC+configureView.swift"; sourceTree = "<group>"; };
 		E3370F5E1F3F74F200DC279E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E33800921F7D1B150013D209 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E3784D8D1F8693C0007D5532 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		E3784D8F1F869790007D5532 /* OnboardingCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionCell.swift; sourceTree = "<group>"; };
+		E3784D911F878274007D5532 /* PageOnboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOnboard.swift; sourceTree = "<group>"; };
 		E3B369181F2BB83700C6C7C5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E3B77EF81F344B24008B1937 /* MapVC+configureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MapVC+configureView.swift"; sourceTree = "<group>"; };
 		E3B9C5B51F21D66C00A69ABC /* Tazalyk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tazalyk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,7 +70,6 @@
 		E3D6736E1F2945BF00D9C0B9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E3D673711F29CA7F00D9C0B9 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		E3ED7C891F2A6BB300DD5A56 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
-		E3ED7C8D1F2B58E300DD5A56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3ED7C8F1F2B661E00DD5A56 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E3F713C11F4327FA00377618 /* NotRegisteredProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotRegisteredProfileVC.swift; sourceTree = "<group>"; };
 		E3F713C31F462FAF00377618 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 		E3B9C5CA1F21D79400A69ABC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E3784D8D1F8693C0007D5532 /* OnboardingVC.swift */,
 				E3F713E71F48B0E200377618 /* AdminViewController.swift */,
 				E3B9C5BA1F21D66C00A69ABC /* FirstViewController.swift */,
 				E3FD80661F3316ED00AF31FB /* FirstVC+handler.swift */,
@@ -178,6 +185,7 @@
 		E3B9C5CB1F21D79F00A69ABC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E3784D8F1F869790007D5532 /* OnboardingCollectionCell.swift */,
 				E3FD805C1F30518200AF31FB /* CategoryCollectionCell.swift */,
 				E3F713E91F4DB41D00377618 /* RankingTableViewCell.swift */,
 			);
@@ -191,6 +199,7 @@
 				E3FD805E1F30534C00AF31FB /* Category.swift */,
 				E3370F5E1F3F74F200DC279E /* User.swift */,
 				E3F713C51F46DE2800377618 /* Passed.swift */,
+				E3784D911F878274007D5532 /* PageOnboard.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -203,8 +212,8 @@
 				E3CD77251F38314700A865F3 /* Assets.xcassets */,
 				E3B9C5C11F21D66C00A69ABC /* LaunchScreen.storyboard */,
 				E32F476A1F266FFC00E6E605 /* Tazalyk.entitlements */,
-				E3ED7C8D1F2B58E300DD5A56 /* GoogleService-Info.plist */,
 				E3B9C5C41F21D66C00A69ABC /* Info.plist */,
+				E33800921F7D1B150013D209 /* GoogleService-Info.plist */,
 				E3D673711F29CA7F00D9C0B9 /* Storyboard.storyboard */,
 			);
 			name = "Supporting files";
@@ -254,7 +263,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Next Step";
 				TargetAttributes = {
 					E3B9C5B41F21D66C00A69ABC = {
@@ -309,7 +318,6 @@
 				E3FD80561F2F994400AF31FB /* Proxima Nova Regular.otf in Resources */,
 				E3FD80571F2F994400AF31FB /* Proxima Nova Semibold.otf in Resources */,
 				E3B9C5C31F21D66C00A69ABC /* LaunchScreen.storyboard in Resources */,
-				E3ED7C8E1F2B58E300DD5A56 /* GoogleService-Info.plist in Resources */,
 				E3D673721F29CA7F00D9C0B9 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3A539011F7D214A002079EA /* GoogleService-Info.plist in Sources */,
 				E3B77EF91F344B24008B1937 /* MapVC+configureView.swift in Sources */,
 				E3FD805F1F30534C00AF31FB /* Category.swift in Sources */,
 				E3ED7C8A1F2A6BB300DD5A56 /* AuthorizationViewController.swift in Sources */,
@@ -389,6 +398,7 @@
 				E3F713EC1F4EE49C00377618 /* DetailedPinViewController.swift in Sources */,
 				E3FD80671F3316ED00AF31FB /* FirstVC+handler.swift in Sources */,
 				E3370F5F1F3F74F200DC279E /* User.swift in Sources */,
+				E3784D901F869790007D5532 /* OnboardingCollectionCell.swift in Sources */,
 				E3B369191F2BB83700C6C7C5 /* MapViewController.swift in Sources */,
 				E3FD80691F33191600AF31FB /* LoginVC+handler.swift in Sources */,
 				E3F713E81F48B0E200377618 /* AdminViewController.swift in Sources */,
@@ -396,10 +406,12 @@
 				E3D6736F1F2945BF00D9C0B9 /* LoginViewController.swift in Sources */,
 				E3F713EA1F4DB41D00377618 /* RankingTableViewCell.swift in Sources */,
 				E3FD80631F32FCE000AF31FB /* RankingViewController.swift in Sources */,
+				E3784D921F878274007D5532 /* PageOnboard.swift in Sources */,
 				E3FD80651F32FCEB00AF31FB /* ProfileViewController.swift in Sources */,
 				E3B9C5BB1F21D66C00A69ABC /* FirstViewController.swift in Sources */,
 				E3370F5D1F3D829D00DC279E /* ProfileVC+configureView.swift in Sources */,
 				E3FD80611F30539E00AF31FB /* Pin.swift in Sources */,
+				E3784D8E1F8693C0007D5532 /* OnboardingVC.swift in Sources */,
 				E3ED7C901F2B661E00DD5A56 /* TabBarViewController.swift in Sources */,
 				E3B9C5B91F21D66C00A69ABC /* AppDelegate.swift in Sources */,
 				E3F713C21F4327FA00377618 /* NotRegisteredProfileVC.swift in Sources */,
@@ -431,7 +443,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -439,7 +453,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -462,7 +480,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -481,7 +499,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -489,7 +509,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -506,7 +530,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

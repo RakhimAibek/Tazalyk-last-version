@@ -34,7 +34,7 @@ extension ProfileViewController {
         userBonusLabel.textColor = UIColor(red: 79.0/255.0, green: 87.0/255.0, blue: 102.0/255.0, alpha: 1.0)
         
         //Info yourStatistic
-        yourStatisticLabel.text = "Ваша статистика"
+        yourStatisticLabel.text = "Ваша эко-статистика"
         yourStatisticLabel.textColor = UIColor(red: 79.0/255.0, green: 87.0/255.0, blue: 102.0/255.0, alpha: 1.0)
         yourStatisticLabel.font = UIFont(name: "ProximaNova-Bold", size: 16.0)
         
@@ -44,7 +44,7 @@ extension ProfileViewController {
         thirdLine.backgroundColor = UIColor(red: 234.0/255.0, green: 234.0/255.0, blue: 234.0/255.0, alpha: 1.0)
         
         //Circle ProgressView
-        circleProgressView.progress = 0.3
+        circleProgressView.progress = -0.8
         circleProgressView.roundedCap = true
         circleProgressView.trackWidth = 12.0
         circleProgressView.trackBackgroundColor = UIColor(red: 234.0/255.0, green: 233.0/255.0, blue: 241, alpha: 1.0)
@@ -122,8 +122,8 @@ extension ProfileViewController {
         settingsButton <- [
             Top(35.0),
             Right(20.0),
-            Height(20.0),
-            Width(20.0)
+            Height(23.0),
+            Width(23.0)
         ]
 
         userNameLabel <- [

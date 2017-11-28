@@ -35,14 +35,15 @@ class DetailedPinViewController: UIViewController {
         configureView()
         setupConstraints()
         guard let place = selectedPinVar else { return }
+        
+        
+        pinTimeLabel.text = place.timetable?.replacingOccurrences(of: ".", with: "\n")
         pinAddressLabel.text = place.address
-        pinTimeLabel.text = place.timeTable
-        pinContactLabel.text = place.contactInfo
+        pinContactLabel.text = place.contact
 
         if let pinImageURL = place.imageLink {
             let url = URL(string: pinImageURL)
-            print(url!)
-           URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
                 if error != nil {
                     print(error!, "Got error from download PinImage")
                     return
@@ -54,8 +55,8 @@ class DetailedPinViewController: UIViewController {
            }).resume()
         }
         
-        if place.sales == "yes" {
-            infoSalesLabel.text = "* Сдав 1 кг вторсырья в данном пункте, Вы получаете 1 бонус. За достижение отметки в 30 бонусов присуждается приз - 1 билет в кино."
+        if place.sale == "yes" {
+            infoSalesLabel.text = "* Сдав 1 кг вторсырья в данном пункте, Вы получаете 1 бонус. За достижение отметки в 15 бонусов присуждается приз - 2 билета в кино."
             ticketImageView.image = UIImage(named: "ticketCinema")
         }
         
@@ -70,6 +71,10 @@ class DetailedPinViewController: UIViewController {
         
         //Detailed
         detailedPinImageView.contentMode = .scaleAspectFit
+        if detailedPinImageView.image == nil {
+            self.detailedPinImageView.image = UIImage(named: "loadingDetailedImagePin")
+        }
+        
         
         //AdressLabel
         addressTextLabel.text = "Адрес"
