@@ -124,7 +124,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         
         //Resend Phone Number SetupView
         resendPhoneButton.titleLabel?.font = UIFont(name: "ProximaNova-Semibold", size: 14.0)
-        resendPhoneButton.setTitle("Не верный номер?", for: .normal)
+        resendPhoneButton.setTitle("Неверный номер?", for: .normal)
         resendPhoneButton.setTitleColor(UIColor.white, for: .normal)
         resendPhoneButton.setTitleColor(UIColor(red: 109.0/255.0, green: 168.0/255.0, blue: 207.0/255.0, alpha: 1.0), for: .highlighted)
         resendPhoneButton.titleLabel?.textAlignment = .right
@@ -132,7 +132,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         
         //ResendCode Button SetupView
         resendCodeButton.titleLabel?.font = UIFont(name: "ProximaNova-Semibold", size: 13.0)
-        resendCodeButton.setTitle("Код не пришел?", for: .normal)
+//        resendCodeButton.setTitle("Код не пришел?", for: .normal)
         resendCodeButton.setTitleColor(UIColor.white, for: .normal)
         resendCodeButton.setTitleColor(UIColor(red: 109.0/255.0, green: 168.0/255.0, blue: 207.0/255.0, alpha: 1.0), for: .highlighted)
         resendCodeButton.titleLabel?.textAlignment = .center
@@ -211,7 +211,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     //ActionTimer
     func actionTimer() {
         time -= 1
-        timerLabel.text = "Переотправить код можно через 0:\(time) секунд"
+        timerLabel.text = "Код поступит в течение 0:\(time) секунд"
         
         if time == 0  {
             timer.invalidate()
@@ -263,10 +263,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
                 Database.database().reference().child("Users").child((user?.uid)!).child("userRole").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     if let userRole = snapshot.value as? String {
-                        print(userRole, "is role of user")
-                        
                         if userRole == "admin" {
-                            
                             let adminDefaults = UserDefaults.standard
                             adminDefaults.set(Auth.auth().currentUser?.uid, forKey: "adminRole")
                             adminDefaults.synchronize()
@@ -277,10 +274,16 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
                             })
                             
                         } else {
-                            //write in DataBase
-                            self?.ref = Database.database().reference()
-                            self?.ref?.child("Users").child((user?.uid)!).child("phoneNumber").setValue(user?.phoneNumber)
-                            self?.ref?.child("Users").child((user?.uid)!).child("userRole").setValue("user")
+//                            self?.ref = Database.database().reference()
+//                            self?.ref?.child("Users").child((user?.uid)!).child("phoneNumber").setValue(user?.phoneNumber)
+//                            self?.ref?.child("Users").child((user?.uid)!).child("userRole").setValue("user")
+//                            self?.ref?.child("Users").child((user?.uid)!).child("userName").setValue("")
+
+////                            let phoneNumber = data["phoneNumber"] as? String ?? ""
+
+////                            let userBonus = data["bonus"] as? Int ?? 0
+////                            let totalPassed = data["total"] as? Int ?? 0
+////                            let imageLink = data["imageLink"] as? String ?? ""
                             
                             //save user uid in UserDefaults
                             defaults.set(Auth.auth().currentUser?.uid, forKey: "userUID")
@@ -293,11 +296,17 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
                         }
                         
                     } else {
-                        
+
                         //write in DataBase
                         self?.ref = Database.database().reference()
                         self?.ref?.child("Users").child((user?.uid)!).child("phoneNumber").setValue(user?.phoneNumber)
                         self?.ref?.child("Users").child((user?.uid)!).child("userRole").setValue("user")
+                        self?.ref?.child("Users").child((user?.uid)!).child("userName").setValue("")
+                        self?.ref?.child("Users").child((user?.uid)!).child("bonus").setValue(0)
+                        self?.ref?.child("Users").child((user?.uid)!).child("total").setValue(0)
+                        self?.ref?.child("Users").child((user?.uid)!).child("imageLink").setValue("")
+                        
+                        
                         
                         //save user uid in UserDefaults
                         defaults.set(Auth.auth().currentUser?.uid, forKey: "userUID")

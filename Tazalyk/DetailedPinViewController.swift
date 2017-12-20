@@ -1,4 +1,3 @@
-//
 //  DetailedPinViewController.swift
 //  Tazalyk
 //
@@ -25,7 +24,6 @@ class DetailedPinViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .white
     }
     
@@ -56,7 +54,7 @@ class DetailedPinViewController: UIViewController {
         }
         
         if place.sale == "yes" {
-            infoSalesLabel.text = "* Сдав 1 кг вторсырья в данном пункте, Вы получаете 1 бонус. За достижение отметки в 15 бонусов присуждается приз - 2 билета в кино."
+            infoSalesLabel.text = "*Сдав 1 кг вторсырья в данном пункте, Вы получите 1 бонус. За достижение отметки в 25 бонусов присуждаются призы - билет в KinoPark / билет в Медео. Акция действует с 7.12.2017 до 28.02.2018 года"
             ticketImageView.image = UIImage(named: "ticketCinema")
         }
         

@@ -10,6 +10,7 @@ import UIKit
 import Fabric
 import Crashlytics
 import StoreKit
+import Siren
 import Firebase
 import UserNotifications
 import SVProgressHUD
@@ -43,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
             if let window = self.window {
                 window.rootViewController = firstNavigationController
                 window.makeKeyAndVisible()
+                setupSiren()
             }
             
         }
@@ -64,6 +66,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
         Fabric.with([Crashlytics.self])
         // TODO: Move this to where you establish a user session
         return true
+    }
+    
+     func setupSiren() {
+        
+        let siren = Siren.shared
+        siren.debugEnabled = true
+        
+        siren.majorUpdateAlertType = .option
+        siren.minorUpdateAlertType = .option
+        siren.patchUpdateAlertType = .option
+        siren.revisionUpdateAlertType = .option
+        siren.forceLanguageLocalization = Siren.LanguageType.Russian
+        
     }
 
     //Added from other example of project
@@ -108,16 +123,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        Siren.shared.checkVersion(checkType: .immediately)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        Siren.shared.checkVersion(checkType: .immediately)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+}
 
+extension AppDelegate: SirenDelegate {
+    
+    func sirenDidShowUpdateDialog(alertType: Siren.AlertType) {
+        print(#function, alertType)
+    }
+    
+    func sirenUserDidCancel() {
+        print(#function)
+    }
+    
+    func sirenUserDidSkipVersion() {
+        print(#function)
+    }
+    
+    func sirenUserDidLaunchAppStore() {
+        print(#function)
+    }
+    
+    func sirenDidFailVersionCheck(error: Error) {
+        print(#function, error)
+    }
+    
+    func sirenLatestVersionInstalled() {
+        print(#function, "Latest version of app is installed")
+    }
+    
+    func sirenDidDetectNewVersionWithoutAlert(message: String) {
+        print(#function, "\(message).\nRelease type")
+    }
 }
 

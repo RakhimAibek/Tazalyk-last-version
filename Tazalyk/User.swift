@@ -17,23 +17,25 @@ class User
     var userRole: String?
     var bonus: Int?
     var total: Int?
+    var imageLink: String?
     
-    init(userName: String, phoneNumber: String, userRole: String, bonus: Int, total: Int) {
+    init(userName: String, phoneNumber: String, userRole: String, bonus: Int, total: Int, imageLink: String) {
         self.userName = userName
         self.phoneNumber = phoneNumber
         self.userRole = userRole
         self.bonus = bonus
         self.total = total
+        self.imageLink = imageLink
     }
     
     init(snapshot: DataSnapshot){
-        
         let data = snapshot.value as? NSDictionary
         self.userName = data?["userName"] as? String ?? ""
         self.phoneNumber = data?["phoneNumber"] as? String ?? ""
         self.userRole = data?["userRole"] as? String ?? ""
         self.bonus = data?["bonus"] as? Int ?? 0
         self.total = data?["total"] as? Int ?? 0
+        self.imageLink = data?["imageLink"] as? String ?? ""
     }
     
     static func fetch(completion: @escaping (([User]?, String?) -> Void)) {
@@ -52,8 +54,9 @@ class User
                 let userRole = data["userRole"] as? String ?? ""
                 let userBonus = data["bonus"] as? Int ?? 0
                 let totalPassed = data["total"] as? Int ?? 0
+                let imageLink = data["imageLink"] as? String ?? ""
                 
-                let castedObject = User(userName: userName, phoneNumber: phoneNumber, userRole: userRole, bonus: userBonus, total: totalPassed)
+                let castedObject = User(userName: userName, phoneNumber: phoneNumber, userRole: userRole, bonus: userBonus, total: totalPassed, imageLink: imageLink)
                 
                 resultArray.append(castedObject)
                 completion(resultArray, nil)

@@ -159,10 +159,6 @@ class AdminViewController: UIViewController, UITextFieldDelegate {
     func configureDatabase(boolValue: Bool) {
         
         //Setuping Date to send in firebase database
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        let resultDate = formatter.string(from: date)
         var bonusNumber = 0
         
         if let unwrappedbonusNumber = Int(typeNumberOfBonus.text!) {

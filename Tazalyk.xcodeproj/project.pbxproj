@@ -12,6 +12,7 @@
 		E3057A611F61AACC006E0955 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3057A5F1F61AACC006E0955 /* Crashlytics.framework */; };
 		E3370F5D1F3D829D00DC279E /* ProfileVC+configureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3370F5C1F3D829D00DC279E /* ProfileVC+configureView.swift */; };
 		E3370F5F1F3F74F200DC279E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3370F5E1F3F74F200DC279E /* User.swift */; };
+		E35EE99C1FCE4C71002582CB /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35EE99B1FCE4C71002582CB /* ImageViewExtension.swift */; };
 		E3784D8E1F8693C0007D5532 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3784D8D1F8693C0007D5532 /* OnboardingVC.swift */; };
 		E3784D901F869790007D5532 /* OnboardingCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3784D8F1F869790007D5532 /* OnboardingCollectionCell.swift */; };
 		E3784D921F878274007D5532 /* PageOnboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3784D911F878274007D5532 /* PageOnboard.swift */; };
@@ -56,6 +57,7 @@
 		E3370F5C1F3D829D00DC279E /* ProfileVC+configureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileVC+configureView.swift"; sourceTree = "<group>"; };
 		E3370F5E1F3F74F200DC279E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E33800921F7D1B150013D209 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E35EE99B1FCE4C71002582CB /* ImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 		E3784D8D1F8693C0007D5532 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		E3784D8F1F869790007D5532 /* OnboardingCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionCell.swift; sourceTree = "<group>"; };
 		E3784D911F878274007D5532 /* PageOnboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOnboard.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				E3370F5E1F3F74F200DC279E /* User.swift */,
 				E3F713C51F46DE2800377618 /* Passed.swift */,
 				E3784D911F878274007D5532 /* PageOnboard.swift */,
+				E35EE99B1FCE4C71002582CB /* ImageViewExtension.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				E3B77EF91F344B24008B1937 /* MapVC+configureView.swift in Sources */,
 				E3FD805F1F30534C00AF31FB /* Category.swift in Sources */,
 				E3ED7C8A1F2A6BB300DD5A56 /* AuthorizationViewController.swift in Sources */,
+				E35EE99C1FCE4C71002582CB /* ImageViewExtension.swift in Sources */,
 				E3F713C61F46DE2800377618 /* Passed.swift in Sources */,
 				E3F713EC1F4EE49C00377618 /* DetailedPinViewController.swift in Sources */,
 				E3FD80671F3316ED00AF31FB /* FirstVC+handler.swift in Sources */,

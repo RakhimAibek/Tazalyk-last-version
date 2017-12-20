@@ -9,6 +9,7 @@
 import UIKit
 import EasyPeasy
 import FirebaseAuth
+import FirebaseDatabase
 import SVProgressHUD
 
 class SettingsViewController: UIViewController {
@@ -16,6 +17,9 @@ class SettingsViewController: UIViewController {
     let textDescriptionLabel = UILabel()
     let textRateLabel = UILabel()
     let rateButton = UIButton()
+    let changeNameBTN = UIButton()
+    
+    var myref: DatabaseReference?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,20 +73,25 @@ class SettingsViewController: UIViewController {
         textRateLabel.textAlignment = .center
         textRateLabel.numberOfLines = 0
         
-        [textDescriptionLabel, rateButton, textRateLabel].forEach {
+        //Button to change name
+        changeNameBTN.setTitle("Изменить имя", for: .normal)
+        changeNameBTN.setTitleColor(.white, for: .normal)
+        changeNameBTN.setTitleColor(UIColor(red: 219.0/255, green: 219.0/255, blue: 219.0/255, alpha: 0.7), for: .highlighted)
+        changeNameBTN.addTarget(self, action: #selector(changeNameBTNpressed(sender:)), for: .touchUpInside)
+        changeNameBTN.titleLabel?.font = UIFont(name: "ProximaNova-Bold", size: 16.0)
+        changeNameBTN.backgroundColor = UIColor(red: 109.0/255.0, green: 168.0/255.0, blue: 207.0/255.0, alpha: 1.0)
+        changeNameBTN.layer.cornerRadius = 7.0
+        
+        
+        [textDescriptionLabel, rateButton, textRateLabel, changeNameBTN].forEach {
             self.view.addSubview($0)
         }
         
     }
     
-    func rateButtonPressed(sender: UIButton) {
-        let appDelegate = AppDelegate()
-        appDelegate.requestReview()
-    }
-    
     func configureConstraints() {
         textDescriptionLabel <- [
-            Top(150.0),
+            Top(120.0),
             CenterX(0.0),
             Left(30.0),
             Right(30.0)
@@ -97,15 +106,67 @@ class SettingsViewController: UIViewController {
   
         rateButton <- [
             CenterX(0.0),
-            Top(15.0).to(textRateLabel),
+            Top(10.0).to(textRateLabel),
             Left(30.0),
             Right(30.0),
             Height(48.0)
         ]
+        
+        changeNameBTN <- [
+            CenterX(0.0),
+            Top(15.0).to(rateButton),
+            Left(30.0),
+            Right(30.0),
+            Height(48.0)
+            ].when({ () -> Bool in
+                return UserDefaults.standard.object(forKey: "userUID") != nil
+        })
+
     }
     
     func backButtonPressed(sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func rateButtonPressed(sender: UIButton) {
+        let appDelegate = AppDelegate()
+        appDelegate.requestReview()
+    }
+    
+    func changeNameBTNpressed(sender: UIButton) {
+    
+        //alert of changing name
+        let alert = UIAlertController(title: "Изменение данных", message: "Ваше имя - \(UserDefaults.standard.object(forKey: "currentUserName") ?? "")", preferredStyle: .alert)
+
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .default
+            textField.keyboardType = .default
+            textField.autocorrectionType = .default
+            textField.placeholder = "Введите новое имя"
+            textField.clearButtonMode = .whileEditing
+        }
+
+        let submitAction = UIAlertAction(title: "Изменить", style: .default, handler: { [weak self] (action) -> Void in
+
+            //textEditing
+            let textField = alert.textFields![0]
+            let userName = textField.text!
+            let currentUserId = UserDefaults.standard.object(forKey: "userUID")
+            self?.myref = Database.database().reference().child("Users").child(currentUserId as! String)
+            
+            if userName.characters.count > 3 {
+                self?.myref?.child("userName").setValue(userName)
+            }
+            
+        })
+
+        let cancelAction = UIAlertAction(title: "Отменить", style: .destructive, handler: { (action) -> Void in })
+
+        alert.addAction(submitAction)
+        alert.addAction(cancelAction)
+
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     func logOutButtonPressed(sender: UIBarButtonItem) {
@@ -117,6 +178,7 @@ class SettingsViewController: UIViewController {
 
                 if Auth.auth().currentUser == nil {
                     UserDefaults.standard.removeObject(forKey: "userUID")
+                    UserDefaults.standard.removeObject(forKey: "adminRole")
                     UserDefaults.standard.synchronize()
 
                     let firstVC = FirstViewController()

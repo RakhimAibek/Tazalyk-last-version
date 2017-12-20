@@ -26,11 +26,6 @@ class FirstViewController: UIViewController {
         setupConstraints()
         createGradientLayer()
         view.backgroundColor = UIColor.white
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

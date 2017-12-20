@@ -42,7 +42,6 @@ extension LoginViewController {
                         print("Verification error \(String(describing: error?.localizedDescription))")
                         
                     } else {
-                        
                         //MARK: UserDefaults
                         let defaults = UserDefaults.standard
                         defaults.set(verificationCode!, forKey: "verificationId")
